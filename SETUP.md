@@ -1,14 +1,12 @@
-# Setup — only you can do these steps
+# Setup
 
-NOX never creates accounts or handles keys. You already have Vercel and Supabase (GitHub login).
+## Publish with GitHub Pages
+GitHub Pages serves `index.html` from the `main` branch root. No Vercel needed for this static page.
+On a free GitHub plan Pages only works for **public** repos (GitHub Pro allows private ones).
+Settings → Pages → Source: *Deploy from a branch* → `main` / `/ (root)`.
+URL: https://christoph-rump.github.io/christoph-lucid-dreaming/ (optional own domain: Settings → Pages → Custom domain).
 
-## 1. Put it on Vercel (makes the site reachable — do this when the launch list in docs/NOTES.md is done)
-1. vercel.com → **Add New… → Project** → import `christoph-rump/christoph-lucid-dreaming`.
-2. Framework: Next.js (detected). No settings needed. **Deploy.**
-3. Optional: **Settings → Domains** to add your own domain.
-
-## 2. Supabase (only needed once the newsletter / members area is built)
-1. supabase.com → **New project** (separate from the facilitator network's project).
-2. **Settings → API**: copy the Project URL and the `anon` public key.
-3. Vercel → this project → **Settings → Environment Variables**:
-   `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`. Redeploy.
+## Supabase (only for the newsletter / members area later)
+A static page can talk to Supabase directly (like the facilitator network does): create a separate Supabase
+project and put its URL + `anon` public key into the page config — the anon key is meant to be public;
+row-level security protects the data.

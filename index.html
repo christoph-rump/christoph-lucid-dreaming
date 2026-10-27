@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Christoph Rump – Lucid dreaming workshops and retreats</title>
+<meta name="description" content="Lucid dreaming workshops, retreats and courses with certified facilitator Christoph Rump: mindful day and night routines for calmer days and more conscious nights.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Newsreader:opsz,wght@6..72,400..600&display=swap">
+<style>
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+
+  --ink: #14172E;
+  --ink-2: #1B1F45;
+  --dusk: #4A3F8C;
+  --haze: #7E5A9E;
+  --moon: #EDE9FF;
+  --glow: #FFC9A3;
+  --lucid: #7FE3D0;
+
+  --day-bg: #EEEDF8;
+  --day-ink: #1B1A38;
+  --day-muted: #4B4A6E;
+  --day-focus: #3B2F80;
+  --rule-day: rgba(27, 26, 56, .18);
+
+  --night-ink: #EEEBFF;
+  --night-muted: #B9B7DA;
+
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --serif: "Newsreader", Georgia, "Iowan Old Style", "Times New Roman", serif;
+
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  --h1: clamp(2.4rem, 9.4vw, 7.5rem);
+  --moon-size: clamp(3.5rem, 8vw, 6.5rem);
+  --moon-offset: calc(var(--h1) * 1.9 + 1.5rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --day-bg: #262A55;
+    --day-ink: #ECEAFB;
+    --day-muted: #B5B3D8;
+    --day-focus: #7FE3D0;
+    --rule-day: rgba(236, 234, 251, .2);
+  }
+}
+:root[data-theme="dark"] {
+  --day-bg: #262A55;
+  --day-ink: #ECEAFB;
+  --day-muted: #B5B3D8;
+  --day-focus: #7FE3D0;
+  --rule-day: rgba(236, 234, 251, .2);
+}
+
+*, *::before, *::after { box-sizing: inherit; }
+
+html {
+  scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 7rem);
+  background: var(--ink);
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--night-ink);
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+}
+
+:focus-visible { outline: 3px solid var(--lucid); outline-offset: 3px; }
+.on-day :focus-visible { outline-color: var(--day-focus); }
+
+.wrap { width: 100%; max-width: 70rem; margin: 0 auto; }
+
+/* ---------- Header: brand, page tabs, language ---------- */
+.site {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 20;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "name tabs lang";
+  align-items: center;
+  column-gap: 1.5rem;
+  padding: .75rem var(--gutter);
+  background: color-mix(in srgb, var(--ink) 78%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.name {
+  grid-area: name;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -.01em;
+  color: var(--night-ink);
+  text-decoration: none;
+}
+.tabs { grid-area: tabs; justify-self: end; }
+.tabs ul { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0 .25rem; list-style: none; margin: 0; padding: 0; }
+.tabs a {
+  display: block;
+  font-family: var(--display);
+  font-size: .98rem;
+  font-weight: 500;
+  color: var(--night-muted);
+  text-decoration: none;
+  padding: .5rem .8rem;
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+}
+.tabs a:hover { color: var(--night-ink); }
+.tabs a[aria-current="page"] { color: var(--night-ink); border-bottom-color: var(--lucid); }
+
+.lang { grid-area: lang; display: flex; gap: .25rem; }
+.lang-btn {
+  font-family: var(--display);
+  font-size: .85rem;
+  font-weight: 600;
+  background: none;
+  color: var(--night-muted);
+  border: 0;
+  padding: .3rem .55rem;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  border-radius: .35rem;
+  cursor: pointer;
+}
+.lang-btn[aria-pressed="true"] { background: var(--moon); color: var(--ink); }
+
+@media (max-width: 44rem) {
+  .site { grid-template-columns: 1fr auto; grid-template-areas: "name lang" "tabs tabs"; row-gap: .25rem; }
+  .tabs { justify-self: stretch; }
+  .tabs ul { justify-content: space-between; gap: 0; }
+  .tabs a { padding: .5rem .35rem; font-size: .92rem; }
+}
+@media (max-width: 26rem) {
+  .tabs a { padding: .5rem .2rem; font-size: .86rem; }
+}
+
+/* ---------- Pages ---------- */
+main { display: flex; flex-direction: column; flex: 1 0 auto; }
+.view { flex: 1 0 auto; }
+[tabindex="-1"]:focus { outline: none; }
+
+/* ---------- Shared type ---------- */
+.h1-type {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: var(--h1);
+  line-height: .95;
+  letter-spacing: -.035em;
+  margin: 0;
+  color: var(--moon);
+}
+.h1-type .line { display: block; }
+
+.statement {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  margin: 0 0 1.25rem;
+}
+.lead { max-width: 38rem; margin: 0; }
+h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: -.01em;
+  line-height: 1.25;
+  margin: 0 0 .5rem;
+}
+
+/* ---------- Hero: the page opens at the horizon between day and night ---------- */
+.hero { display: flex; flex-direction: column; }
+
+.sky {
+  position: relative;
+  z-index: 1;
+  min-height: calc(var(--moon-offset) + var(--moon-size) + 5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 var(--gutter);
+  background: linear-gradient(to bottom, var(--ink) 0%, var(--dusk) 62%, var(--haze) 100%);
+  overflow: hidden;
+}
+.sky::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glow) 30%, var(--glow) 70%, transparent);
+  box-shadow: 0 0 28px 6px rgba(255, 201, 163, .28);
+}
+.sky .wrap { position: relative; z-index: 1; }
+
+.stars { position: absolute; inset: 0; z-index: 0; }
+.stars span { position: absolute; border-radius: 50%; background: #fff; }
+
+.moon {
+  position: absolute;
+  right: max(var(--gutter), calc((100vw - 70rem) / 2));
+  width: var(--moon-size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff 0, var(--moon) 45%, #C3BCF0 100%);
+  box-shadow: 0 0 60px 10px rgba(237, 233, 255, .35);
+}
+.sky .moon { bottom: var(--moon-offset); }
+
+.water {
+  position: relative;
+  z-index: 0;
+  padding: 0 var(--gutter) clamp(3.5rem, 8vw, 6rem);
+  background: linear-gradient(to bottom, var(--ink-2), var(--ink));
+  overflow: hidden;
+}
+.water .wrap { position: relative; z-index: 1; }
+.water .moon {
+  top: var(--moon-offset);
+  z-index: 0;
+  opacity: .5;
+  filter: url(#ripple);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .9), rgba(0, 0, 0, .15));
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .9), rgba(0, 0, 0, .15));
+}
+
+.reflection {
+  transform: scaleY(-1);
+  filter: url(#ripple);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, .6), transparent 85%);
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, .6), transparent 85%);
+  user-select: none;
+  pointer-events: none;
+}
+
+.anim-toggle {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  min-height: 2.75rem;
+  padding: .5rem 1rem;
+  font-family: var(--display);
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--night-muted);
+  background: none;
+  border: 1px solid rgba(238, 235, 255, .4);
+  border-radius: .5rem;
+  cursor: pointer;
+}
+.anim-toggle:hover { color: var(--night-ink); border-color: var(--night-ink); }
+.anim-toggle[hidden] { display: none; }
+.hero-sub {
+  max-width: 34rem;
+  margin: 2.25rem 0 0;
+  font-size: 1.25rem;
+  color: #D5D2F0;
+}
+.actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 1.75rem; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+  padding: .85rem 1.4rem;
+  border-radius: .6rem;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+}
+.btn-primary { background: var(--lucid); color: #0F1230; }
+.btn-primary:hover { background: #A6F0E2; }
+.btn-ghost { color: var(--night-ink); border-color: rgba(238, 235, 255, .55); }
+.btn-ghost:hover { border-color: var(--night-ink); background: rgba(238, 235, 255, .08); }
+
+/* Buttons on light pages */
+.on-day .btn-primary { background: var(--day-ink); color: var(--day-bg); }
+.on-day .btn-primary:hover { opacity: .88; }
+.on-day .btn-ghost { color: var(--day-ink); border-color: var(--day-ink); }
+.on-day .btn-ghost:hover { background: color-mix(in srgb, var(--day-ink) 8%, transparent); }
+
+/* ---------- Approach: day and night, side by side ---------- */
+.split { display: grid; grid-template-columns: 1fr 1fr; }
+.panel { padding: clamp(3.5rem, 8vw, 7rem) var(--gutter); }
+.panel > div { max-width: 30rem; }
+.panel-day {
+  background: var(--day-bg);
+  color: var(--day-ink);
+  padding-left: max(var(--gutter), calc((100vw - 70rem) / 2));
+}
+.panel-night {
+  background: var(--ink);
+  color: var(--night-ink);
+  padding-left: clamp(2rem, 5vw, 4.5rem);
+  padding-right: max(var(--gutter), calc((100vw - 70rem) / 2));
+}
+.panel .statement { margin-bottom: 2.5rem; }
+.panel-day p { margin: 0; color: var(--day-muted); }
+.panel-night p { margin: 0 0 1rem; color: var(--night-muted); }
+.panel-night p:last-child { margin-bottom: 0; }
+@media (max-width: 52rem) {
+  .split { grid-template-columns: 1fr; }
+  .panel-day { padding-left: var(--gutter); }
+  .panel-night { padding-left: var(--gutter); padding-right: var(--gutter); }
+}
+
+/* ---------- Background page ---------- */
+.bg-rows { margin-top: clamp(2rem, 5vw, 3.5rem); border-bottom: 1px solid var(--rule-day); }
+.bg-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: .75rem 2.5rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--rule-day);
+}
+.bg-row h2 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; letter-spacing: -.02em; line-height: 1.2; margin: 0; }
+.bg-row p { margin: 0; color: var(--day-muted); max-width: 38rem; }
+.bg-row p + p { margin-top: 1rem; }
+.bg-row .bg-note { margin-top: 1.25rem; font-size: .95rem; }
+.bg-list { list-style: none; margin: 0; padding: 0; max-width: 38rem; }
+.bg-list li { margin: 0 0 .9rem; color: var(--day-muted); }
+.bg-list li:last-child { margin-bottom: 0; }
+.bg-list a { color: var(--day-ink); font-weight: 500; text-underline-offset: .2em; }
+.bg-list .src { display: block; font-size: .95rem; margin-top: .15rem; }
+@media (max-width: 52rem) { .bg-row { grid-template-columns: 1fr; } }
+.bg-cta { margin-top: 2.5rem; }
+.bg-cta p { margin: 0 0 1.25rem; max-width: 38rem; color: var(--day-muted); }
+
+/* ---------- Benefits ---------- */
+.benefits-list {
+  list-style: none;
+  margin: clamp(2rem, 5vw, 3.5rem) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(2rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--rule-day);
+}
+.benefits-list li {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+  letter-spacing: -.02em;
+  line-height: 1.25;
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--rule-day);
+}
+.benefits-list .sub {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: .95rem;
+  letter-spacing: 0;
+  color: var(--day-muted);
+  margin-top: .2rem;
+}
+@media (max-width: 40rem) { .benefits-list { grid-template-columns: 1fr; } }
+.benefits-note { margin: 2rem 0 0; max-width: 38rem; color: var(--day-muted); }
+.benefits-note a { color: var(--day-ink); text-underline-offset: .2em; }
+
+/* ---------- Offerings ---------- */
+.page-day {
+  background: var(--day-bg);
+  color: var(--day-ink);
+  padding: clamp(4rem, 9vw, 8rem) var(--gutter);
+}
+.page-day .lead { color: var(--day-muted); }
+.offers { list-style: none; margin: clamp(2.5rem, 6vw, 4rem) 0 0; padding: 0; border-bottom: 1px solid var(--rule-day); }
+.offer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.7fr) minmax(0, .8fr);
+  gap: .75rem 2.5rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--rule-day);
+}
+.offer h3 { font-size: 1.5rem; letter-spacing: -.02em; margin: 0; }
+.offer p { margin: 0; color: var(--day-muted); }
+.meta { display: flex; flex-direction: column; list-style: none; margin: 0; padding: 0; font-size: .95rem; line-height: 1.5; color: var(--day-muted); }
+@media (max-width: 52rem) {
+  .offer { grid-template-columns: 1fr; }
+}
+.talks { margin: 2.5rem 0 0; max-width: 38rem; color: var(--day-muted); }
+.talks a { color: var(--day-ink); text-underline-offset: .2em; }
+
+/* Events: empty state */
+.empty { margin-top: clamp(2.5rem, 6vw, 4rem); padding-top: 2rem; border-top: 1px solid var(--rule-day); max-width: 38rem; }
+.empty h3 { font-size: 1.5rem; letter-spacing: -.02em; }
+.empty p { margin: 0 0 1.5rem; color: var(--day-muted); }
+.empty .actions { margin-top: 0; }
+
+/* ---------- About ---------- */
+.about { background: var(--ink); padding: clamp(4rem, 9vw, 8rem) var(--gutter); }
+.about .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 2rem clamp(2rem, 6vw, 5rem); }
+.about .statement { margin: 0; }
+.about-copy p { margin: 0 0 1.25rem; max-width: 38rem; color: var(--night-muted); }
+.about-copy p:first-child { color: var(--night-ink); font-size: 1.3rem; }
+.about-copy .note { font-size: 1rem; }
+@media (max-width: 52rem) { .about .wrap { grid-template-columns: 1fr; } }
+
+/* ---------- Contact ---------- */
+.contact { background: var(--ink-2); padding: clamp(4rem, 9vw, 7rem) var(--gutter); }
+.contact .lead { color: var(--night-muted); }
+.contact .actions { margin-top: 2rem; }
+
+/* ---------- Newsletter (shown on every page, above the footer links) ---------- */
+.newsletter { background: var(--ink-2); padding: clamp(2.5rem, 6vw, 4rem) var(--gutter); }
+.nl-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 1.5rem clamp(2rem, 6vw, 5rem); align-items: start; }
+@media (max-width: 52rem) { .nl-grid { grid-template-columns: 1fr; } }
+.newsletter h2 { font-family: var(--display); font-weight: 600; font-size: 1.6rem; letter-spacing: -.02em; line-height: 1.15; margin: 0 0 .5rem; }
+.newsletter p { margin: 0; color: var(--night-muted); }
+.field label { display: block; font-family: var(--display); font-weight: 500; font-size: 1rem; margin-bottom: .4rem; }
+.field-row { display: flex; flex-wrap: wrap; gap: .75rem; }
+.field input[type="email"] {
+  flex: 1 1 14rem;
+  min-width: 0;
+  min-height: 3rem;
+  font: inherit;
+  font-size: 1.05rem;
+  color: var(--night-ink);
+  background: var(--ink);
+  border: 2px solid var(--night-muted);
+  border-radius: .6rem;
+  padding: .5rem .9rem;
+}
+button.btn { cursor: pointer; }
+.field .btn { min-height: 3rem; }
+.check { display: flex; gap: .75rem; align-items: flex-start; margin-top: 1rem; }
+.check input { flex: none; width: 1.5rem; height: 1.5rem; margin: .15rem 0 0; accent-color: var(--lucid); }
+.check label { color: var(--night-muted); font-size: 1rem; line-height: 1.5; }
+[aria-invalid="true"] { border-color: #FFB4A8; }
+.check input[aria-invalid="true"] { outline: 2px solid #FFB4A8; outline-offset: 2px; }
+.nl-status { margin: .75rem 0 0; min-height: 1.6em; color: var(--night-ink); }
+.newsletter .nl-status[data-state="error"] { color: #FFB4A8; }
+
+/* ---------- Footer link bar ---------- */
+.foot {
+  background: var(--ink);
+  border-top: 1px solid rgba(238, 235, 255, .12);
+  padding: .75rem var(--gutter);
+  font-size: .95rem;
+  color: var(--night-muted);
+}
+.foot-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .25rem 2rem; }
+.foot-nav ul { display: flex; flex-wrap: wrap; gap: 0 1.5rem; list-style: none; margin: 0; padding: 0; }
+.foot-nav a { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--night-ink); text-underline-offset: .2em; }
+.foot { padding-bottom: 1.25rem; }
+.foot-nav a { gap: .5rem; }
+.icon { width: 1.15em; height: 1.15em; flex: none; fill: currentColor; }
+.disclaimer { margin: .75rem 0 0; max-width: 60rem; font-size: .9rem; line-height: 1.55; }
+.disclaimer strong { color: var(--night-ink); font-weight: 600; }
+.foot .copy { margin: .75rem 0 0; }
+.check label a { color: var(--night-ink); text-underline-offset: .2em; }
+
+/* ---------- Sitemap and Impressum pages ---------- */
+.sitemap { list-style: none; margin: clamp(2rem, 5vw, 3rem) 0 0; padding: 0; border-bottom: 1px solid var(--rule-day); max-width: 38rem; }
+.sitemap li { padding: 1.25rem 0; border-top: 1px solid var(--rule-day); }
+.sitemap a { font-family: var(--display); font-weight: 600; font-size: 1.4rem; letter-spacing: -.02em; color: var(--day-ink); text-underline-offset: .2em; }
+.sitemap p { margin: .25rem 0 0; color: var(--day-muted); }
+.imp { display: grid; gap: 2rem; margin-top: clamp(2rem, 5vw, 3rem); max-width: 38rem; }
+.imp h2 { font-family: var(--display); font-weight: 600; font-size: 1.2rem; letter-spacing: -.01em; margin: 0 0 .4rem; }
+.imp address, .imp p { margin: 0; font-style: normal; color: var(--day-muted); }
+.ph { background: #FFD9B8; color: #4A2300; padding: 0 .3em; border-radius: .2em; }
+
+/* ---------- Accessibility helpers ---------- */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -5rem;
+  z-index: 100;
+  background: var(--moon);
+  color: var(--ink);
+  font-family: var(--display);
+  font-weight: 600;
+  padding: .75rem 1rem;
+  border-radius: .5rem;
+  text-decoration: none;
+}
+.skip:focus { top: calc(env(safe-area-inset-top, 0px) + .75rem); }
+
+@media (forced-colors: active) {
+  .btn { border: 2px solid ButtonText; }
+  .tabs a[aria-current="page"] { border-bottom-color: Highlight; }
+  .lang-btn { border: 1px solid ButtonText; }
+  .lang-btn[aria-pressed="true"] { border-color: Highlight; text-decoration: underline; }
+  .field input[type="email"] { border-color: FieldText; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main" data-i18n="skip">Skip to main content</a>
+<p id="announce" class="sr-only" role="status" aria-live="polite"></p>
+
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <symbol id="icon-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+  <filter id="ripple" x="-5%" y="-10%" width="110%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.004 0.06" numOctaves="1" seed="3" result="noise">
+      <animate attributeName="baseFrequency" dur="16s" values="0.004 0.06;0.007 0.08;0.004 0.06" repeatCount="indefinite"/>
+    </feTurbulence>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<header class="site">
+  <a class="name" href="#about">Christoph Rump</a>
+  <nav class="tabs" data-i18n-aria="nav_main_aria" aria-label="Main">
+    <ul role="list">
+      <li><a href="#about" data-route="about" data-i18n="nav_about">About</a></li>
+      <li><a href="#lucid-dreaming" data-route="lucid-dreaming" data-i18n="nav_background">Lucid Dreaming</a></li>
+      <li><a href="#offerings" data-route="offerings" data-i18n="nav_offers">Offerings</a></li>
+      <li><a href="#events" data-route="events" data-i18n="nav_events">Events</a></li>
+      <li><a href="#contact" data-route="contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="lang" role="group" data-i18n-aria="lang_aria" aria-label="Language">
+    <button class="lang-btn" type="button" data-lang="en" lang="en" aria-pressed="true">EN<span class="sr-only"> – English</span></button>
+    <button class="lang-btn" type="button" data-lang="de" lang="de" aria-pressed="false">DE<span class="sr-only"> – Deutsch</span></button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <div id="view-about" class="view">
+  <section class="hero">
+    <div class="sky">
+      <div class="stars" id="stars" aria-hidden="true"></div>
+      <div class="moon" aria-hidden="true"></div>
+      <div class="wrap">
+        <h1 class="h1-type" tabindex="-1"><span class="line" data-i18n="h1a">Notice</span><span class="line" data-i18n="h1b">you’re dreaming.</span></h1>
+      </div>
+    </div>
+    <div class="water">
+      <div class="moon" aria-hidden="true"></div>
+      <div class="wrap">
+        <div class="h1-type reflection" aria-hidden="true"><span class="line" data-i18n="h1a">Notice</span><span class="line" data-i18n="h1b">you’re dreaming.</span></div>
+        <p class="hero-sub" data-i18n="hero_sub">Lucid dreaming workshops, retreats and courses for calmer days and more conscious nights.</p>
+        <button class="anim-toggle" id="anim-toggle" type="button" data-i18n="anim_pause">Pause animation</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" aria-labelledby="about-h">
+    <div class="wrap">
+      <h2 class="statement" id="about-h" data-i18n="ab_h2">Hi, I’m Chris.</h2>
+      <div class="about-copy">
+        <p data-i18n="ab_p1">I’m a certified lucid dreaming facilitator, trainer and coach, with a background in IT consulting.</p>
+        <p data-i18n="ab_p2">My mission is to help people integrate their shadows in the context of mental health, from stress to burnout, through mindful day and night routines. Lucid dreaming is the frame that holds it together.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="split" aria-labelledby="approach-h">
+    <div class="panel panel-day on-day">
+      <div>
+        <h2 class="statement" id="approach-h" data-i18n="ap_h2">Day and night are one practice.</h2>
+        <h3 data-i18n="ap_day_h">By day</h3>
+        <p data-i18n="ap_day_p">Small, mindful routines for attention, rest and boundaries, so you notice stress and burnout signals early instead of late.</p>
+      </div>
+    </div>
+    <div class="panel panel-night">
+      <div>
+        <p class="statement" data-i18n="ap_night_statement">Awareness is the thread between them.</p>
+        <h3 data-i18n="ap_night_h">By night</h3>
+        <p data-i18n="ap_night_p1">Lucid dreaming: recognising that you’re dreaming while it happens, and using that awareness for curiosity, calm and self-regulation.</p>
+        <p data-i18n="ap_night_p2">Dreams are also where our shadows show up, the parts of ourselves we usually avoid. With practice, we can meet them and integrate them.</p>
+      </div>
+    </div>
+  </section>
+
+    <section class="benefits page-day on-day" aria-labelledby="ben-h">
+      <div class="wrap">
+        <h2 class="statement" id="ben-h" data-i18n="ben_h">What lucid dreaming can offer</h2>
+        <p class="lead" data-i18n="ben_lead">Once you know you’re dreaming, a lot becomes possible. These are some of the most common reasons people practise it.</p>
+        <ul class="benefits-list" role="list">
+          <li><span data-i18n="ben1">Psychological healing</span><span class="sub" data-i18n="ben_sub">In a therapeutic setting</span></li>
+          <li><span data-i18n="ben2">PTSD treatment</span><span class="sub" data-i18n="ben_sub">In a therapeutic setting</span></li>
+          <li data-i18n="ben3">Asking big questions</li>
+          <li data-i18n="ben4">Exploring the unconscious mind</li>
+          <li data-i18n="ben5">Inner child work</li>
+          <li data-i18n="ben6">Shadow integration</li>
+          <li data-i18n="ben7">Imaginary rehearsal</li>
+          <li data-i18n="ben8">Simply having fun</li>
+        </ul>
+        <p class="benefits-note"><span data-i18n="ben_note">Healing and trauma work belong with qualified professionals. My offerings are not therapy, but I can introduce you to facilitator colleagues who work within one.</span> <a href="#offerings" data-i18n="ben_note_link">See the introductions</a></p>
+      </div>
+    </section>
+
+  </div>
+
+  <section id="view-lucid-dreaming" class="view page-day on-day" hidden aria-labelledby="bg-h1">
+    <div class="wrap">
+      <h1 class="statement" id="bg-h1" tabindex="-1" data-i18n="bg_h1">What is lucid dreaming?</h1>
+      <p class="lead" data-i18n="bg_lead">Lucid dreaming can sound abstract. It has been studied in sleep laboratories for over 40 years.</p>
+
+      <div class="bg-rows">
+        <div class="bg-row">
+          <h2 data-i18n="bg1_h">A practice with deep roots</h2>
+          <div><p data-i18n="bg1_p">Lucid dreaming is practised as a form of Dream Yoga, a contemplative way of working with awareness in sleep. Science followed in the 1970s and 1980s: Keith Hearne and Stephen LaBerge showed in sleep laboratories that dreamers can know they are dreaming and signal it from inside the dream.</p></div>
+        </div>
+        <div class="bg-row">
+          <h2 data-i18n="bg2_h">What is different from ordinary dreams?</h2>
+          <div>
+            <p data-i18n="bg2_p1">In an ordinary dream we live through scenes and emotions without questioning them. Parts of the prefrontal cortex, at the front of the brain, are less active during REM sleep, when most vivid dreams happen. This is thought to be one reason we accept even the strangest events without a second thought.</p>
+            <p data-i18n="bg2_p2">In a lucid dream, activity in these regions rises markedly within seconds. Researchers found it in the dorsolateral and frontopolar prefrontal cortex and in the precuneus. These are areas typically active when we are awake and reflect on ourselves, keep track of our own thoughts and make deliberate decisions.</p>
+            <p data-i18n="bg2_p3">What does that indicate? Lucidity is not a vague feeling but a measurable state in which waking-type self-awareness appears inside a dream. The dreamer is still asleep and still dreaming, yet can reflect, remember an intention and choose how to act.</p>
+            <p data-i18n="bg2_p4">A 2015 study points the same way: people with high dream lucidity had more gray matter in the frontopolar cortex, a region that is active when we monitor our own thoughts while awake. This suggests a link between lucid dreaming and metacognition, the ability to think about your own thinking.</p>
+            <p class="bg-note" data-i18n="bg2_note">A simplified summary of the studies listed below.</p>
+          </div>
+        </div>
+        <div class="bg-row">
+          <h2 data-i18n="bg3_h">Studies to start with</h2>
+          <div>
+            <ul class="bg-list" role="list">
+              <li><a href="https://doi.org/10.1523/JNEUROSCI.3342-14.2015" target="_blank" rel="noopener"><span lang="en" data-i18n="st1_t">Metacognitive Mechanisms Underlying Lucid Dreaming</span><span class="sr-only" data-i18n="newtab"> (opens in a new tab)</span></a><span class="src" data-i18n="st1_s">Filevich et al., Journal of Neuroscience, 2015 (in English)</span></li>
+              <li><a href="https://www.mpg.de/5925490/meta-consciousness-brain" target="_blank" rel="noopener"><span lang="en" data-i18n="st2_t">The seat of meta-consciousness in the brain</span><span class="sr-only" data-i18n="newtab"> (opens in a new tab)</span></a><span class="src" data-i18n="st2_s">Max Planck Society press release on a study in Sleep, 2012 (in English)</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="bg-row">
+          <h2 data-i18n="bg4_h">Reading and online material</h2>
+          <div>
+            <ul class="bg-list" role="list">
+              <li><a href="https://www.charliemorley.com" target="_blank" rel="noopener"><span lang="en" data-i18n="bk0_a">Charlie Morley</span><span class="sr-only" data-i18n="newtab"> (opens in a new tab)</span></a><span lang="en" data-i18n="bk0_t">: Dreams of Awakening, Dreaming Through Darkness, Wake Up to Sleep</span></li>
+              <li lang="en" data-i18n="bk1">Stephen LaBerge and Howard Rheingold: Exploring the World of Lucid Dreaming</li>
+              <li lang="en" data-i18n="bk2">Tenzin Wangyal Rinpoche: The Tibetan Yogas of Dream and Sleep</li>
+              <li lang="en" data-i18n="bk3">Robert Waggoner: Lucid Dreaming: Gateway to the Inner Self</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-cta">
+        <p data-i18n="bg_cta_p">This is only the start. In the workshops we turn it into practice.</p>
+        <a class="btn btn-primary" href="#offerings" data-i18n="bg_cta_btn">See the offerings</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-offerings" class="view page-day on-day" hidden aria-labelledby="offers-h">
+    <div class="wrap">
+      <h1 class="statement" id="offers-h" tabindex="-1" data-i18n="of_h2">Ways to learn with me</h1>
+      <p class="lead" data-i18n="of_intro">Everything below is still in planning. Follow along on LinkedIn to hear about dates early.</p>
+
+      <ul class="offers" role="list">
+        <li class="offer">
+          <h3 data-i18n="of1_h">Online workshop</h3>
+          <p data-i18n="of1_p">One session of about 3.5 hours, with a 30-minute break. You learn the foundations and leave with a practice you can start straight away.</p>
+          <ul class="meta" role="list"><li data-i18n="of1_m1">Online</li><li data-i18n="of1_m2">About 3.5 hours</li></ul>
+        </li>
+        <li class="offer">
+          <h3 data-i18n="of2_h">Workshop on site</h3>
+          <p data-i18n="of2_p">The same format in person, with more room to exchange and practise together.</p>
+          <ul class="meta" role="list"><li data-i18n="of2_m1">Zürich and Munich</li><li data-i18n="of2_m2">About 3.5 hours</li></ul>
+        </li>
+        <li class="offer">
+          <h3 data-i18n="of3_h">Six-week online course</h3>
+          <p data-i18n="of3_p">Six weeks of guided practice to build a steady lucid dreaming routine.</p>
+          <ul class="meta" role="list"><li data-i18n="of3_m1">Online</li><li data-i18n="of3_m2">6 weeks</li></ul>
+        </li>
+        <li class="offer">
+          <h3 data-i18n="of4_h">Weekend retreat: basics</h3>
+          <p data-i18n="of4_p">A weekend to go deeper into the foundations, co-led with fellow facilitator Robert.</p>
+          <ul class="meta" role="list"><li data-i18n="of4_m1">In person</li><li data-i18n="of4_m2">One weekend</li></ul>
+        </li>
+        <li class="offer">
+          <h3 data-i18n="of5_h">Retreat for advanced practitioners</h3>
+          <p data-i18n="of5_p">For people who already practise regularly and want to go further. Also co-led with Robert.</p>
+          <ul class="meta" role="list"><li data-i18n="of5_m1">In person</li><li data-i18n="of5_m2">Planned for later</li></ul>
+        </li>
+        <li class="offer">
+          <h3 data-i18n="of6_h">Introductions to other facilitators</h3>
+          <p data-i18n="of6_p">Looking for a particular focus or a therapeutic setting? I can connect you with facilitator colleagues around the world, with different specializations and therapeutic backgrounds.</p>
+          <ul class="meta" role="list"><li data-i18n="of6_m1">Worldwide</li><li data-i18n="of6_m2">On request</li></ul>
+        </li>
+      </ul>
+
+      <p class="talks"><span data-i18n="talks">Organising an event or community? I’m happy to give a talk on lucid dreaming and mindful day and night routines.</span> <a href="#contact" data-i18n="talks_link">Get in touch</a></p>
+    </div>
+  </section>
+
+  <section id="view-events" class="view page-day on-day" hidden aria-labelledby="events-h">
+    <div class="wrap">
+      <h1 class="statement" id="events-h" tabindex="-1" data-i18n="ev_h2">Events</h1>
+      <p class="lead" data-i18n="ev_intro">Workshops, retreats and talks will be listed here as soon as dates are set.</p>
+      <div class="empty">
+        <h3 data-i18n="ev_empty_h">No dates yet</h3>
+        <p data-i18n="ev_empty_p">The first dates are still being planned. The quickest way to hear about them is to follow me on LinkedIn or send me a message.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://www.linkedin.com/in/christoph-rump" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-linkedin"/></svg><span data-i18n="ev_li">Follow on LinkedIn</span><span class="sr-only" data-i18n="newtab"> (opens in a new tab)</span></a>
+          <a class="btn btn-ghost" href="#contact" data-i18n="talks_link">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-contact" class="view contact" hidden aria-labelledby="contact-h">
+    <div class="wrap">
+      <h1 class="statement" id="contact-h" tabindex="-1" data-i18n="ct_h2">Say hello</h1>
+      <p class="lead" data-i18n="ct_p">Questions, ideas or an event to plan? Message me on LinkedIn.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/christoph-rump" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-linkedin"/></svg><span data-i18n="ct_li">Message on LinkedIn</span><span class="sr-only" data-i18n="newtab"> (opens in a new tab)</span></a>
+      </div>
+    </div>
+  </section>
+  <section id="view-impressum" class="view page-day on-day" hidden aria-labelledby="imp-h1">
+    <div class="wrap">
+      <h1 class="statement" id="imp-h1" tabindex="-1" data-i18n="imp_h">Legal notice (Impressum)</h1>
+      <div class="imp">
+        <div>
+          <h2 data-i18n="imp_law">Information according to § 5 DDG</h2>
+          <address>Christoph Rump<br><span class="ph">[Straße und Hausnummer]</span><br><span class="ph">[PLZ Ort]</span><br><span class="ph">[Land]</span></address>
+        </div>
+        <div>
+          <h2 data-i18n="imp_contact_h">Contact</h2>
+          <p><span data-i18n="imp_email">Email:</span> <span class="ph">[E-Mail-Adresse]</span></p>
+        </div>
+        <div>
+          <h2 data-i18n="imp_resp_h">Responsible for content (§ 18 Abs. 2 MStV)</h2>
+          <p data-i18n="imp_resp_p">Christoph Rump, address as above</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-sitemap" class="view page-day on-day" hidden aria-labelledby="sm-h1">
+    <div class="wrap">
+      <h1 class="statement" id="sm-h1" tabindex="-1" data-i18n="sm_h1">Sitemap</h1>
+      <p class="lead" data-i18n="sm_intro">All pages of this site at a glance.</p>
+      <ul class="sitemap" role="list">
+        <li><a href="#about" data-i18n="nav_about">About</a><p data-i18n="sm_about_d">Who I am and how I work with lucid dreaming.</p></li>
+        <li><a href="#lucid-dreaming" data-i18n="nav_background">Lucid Dreaming</a><p data-i18n="sm_bg_d">What lucid dreaming is, and what research says.</p></li>
+        <li><a href="#offerings" data-i18n="nav_offers">Offerings</a><p data-i18n="sm_offers_d">Workshops, courses and retreats.</p></li>
+        <li><a href="#events" data-i18n="nav_events">Events</a><p data-i18n="sm_events_d">Upcoming dates.</p></li>
+        <li><a href="#contact" data-i18n="nav_contact">Contact</a><p data-i18n="sm_contact_d">Ways to reach me.</p></li>
+        <li><a href="#impressum" data-i18n="foot_impressum">Impressum</a><p data-i18n="sm_imp_d">Legal notice.</p></li>
+        <li><a href="#privacy" data-i18n="foot_privacy">Privacy policy</a><p data-i18n="sm_priv_d">How your data is handled.</p></li>
+      </ul>
+    </div>
+  </section>
+  <section id="view-privacy" class="view page-day on-day" hidden aria-labelledby="pv-h1">
+    <div class="wrap">
+      <h1 class="statement" id="pv-h1" tabindex="-1" data-i18n="pv_h1">Privacy policy</h1>
+      <div class="imp">
+        <div>
+          <h2 data-i18n="pv_h_ctrl">Who is responsible</h2>
+          <p data-i18n="pv_ctrl_p">The controller is Christoph Rump. Address and email are in the Impressum.</p>
+        </div>
+        <div>
+          <h2 data-i18n="pv_h_host">Hosting and server logs</h2>
+          <p><span data-i18n="pv_host_a">This site is hosted by</span> <span class="ph" data-i18n="pv_ph_host">[hosting provider]</span><span data-i18n="pv_host_b">. When you visit, the server temporarily records technical data such as your IP address, the date and time, and the pages requested. This is needed to deliver and secure the site (Art. 6(1)(f) GDPR).</span></p>
+        </div>
+        <div>
+          <h2 data-i18n="pv_h_font">Fonts</h2>
+          <p><span data-i18n="pv_font_p">This site uses the typefaces Bricolage Grotesque and Newsreader.</span> <span class="ph" data-i18n="pv_font_ph">[Draft note: the preview still loads them from Google Fonts. Self-host the font files before launch and delete this note.]</span></p>
+        </div>
+        <div>
+          <h2 data-i18n="pv_h_stor">Cookies and local settings</h2>
+          <p data-i18n="pv_stor_p">This site does not use cookies, analytics or tracking. If you choose a language, that choice is saved only in your own browser.</p>
+        </div>
+        <div>
+          <h2 data-i18n="pv_h_nl">Newsletter</h2>
+          <p><span data-i18n="pv_nl_a">If you subscribe, I use your email address to send you the newsletter. Sending is handled by</span> <span class="ph" data-i18n="pv_ph_nl">[newsletter provider]</span><span data-i18n="pv_nl_b">. You confirm your address in a confirmation email (double opt-in) and can unsubscribe at any time using the link in every newsletter. Legal basis: your consent (Art. 6(1)(a) GDPR).</span></p>
+        </div>
+        <div>
+          <h2 data-i18n="pv_h_li">Links to other websites</h2>
+          <p data-i18n="pv_li_p">Links on this site, such as those to LinkedIn or to scientific studies, are ordinary links. Data is only passed to the other website if you click one, and its own privacy policy then applies.</p>
+        </div>
+        <div>
+          <h2 data-i18n="pv_h_intro">Introductions to facilitator colleagues</h2>
+          <p data-i18n="pv_intro_p">If you ask me to connect you with a facilitator colleague, I pass on your name and contact details only with your consent, and only to the colleague concerned. Legal basis: your consent (Art. 6(1)(a) GDPR).</p>
+        </div>
+        <div>
+          <h2 data-i18n="pv_h_rights">Your rights</h2>
+          <p data-i18n="pv_rights_p">You have the right to access, correction, deletion, restriction of processing, data portability and objection, and you can withdraw consent at any time. You can also complain to a data protection authority. To exercise your rights, contact me using the details in the Impressum.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<section class="newsletter" aria-labelledby="nl-h">
+  <div class="wrap nl-grid">
+    <div>
+      <h2 id="nl-h" data-i18n="nl_h">Newsletter</h2>
+      <p data-i18n="nl_p">Occasional notes on lucid dreaming, mindful routines and new dates. Unsubscribe at any time.</p>
+    </div>
+    <form class="nl-form" id="nl-form" method="post" action="" novalidate>
+      <div class="field">
+        <label for="nl-email" data-i18n="nl_label">Email address</label>
+        <div class="field-row">
+          <input id="nl-email" name="email" type="email" inputmode="email" autocomplete="email" required aria-describedby="nl-status">
+          <button class="btn btn-primary" type="submit" data-i18n="nl_btn">Subscribe</button>
+        </div>
+      </div>
+      <div class="check">
+        <input id="nl-consent" name="consent" type="checkbox" required aria-describedby="nl-status">
+        <label for="nl-consent"><span data-i18n="nl_consent">I’d like to receive the newsletter by email and understand I can unsubscribe at any time.</span> <a href="#privacy" data-i18n="pv_h1">Privacy policy</a></label>
+      </div>
+      <p id="nl-status" class="nl-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <nav class="foot-nav" data-i18n-aria="foot_nav_aria" aria-label="Footer">
+      <ul role="list">
+        <li><a href="#impressum" data-i18n="foot_impressum">Impressum</a></li>
+        <li><a href="#privacy" data-i18n="foot_privacy">Privacy policy</a></li>
+        <li><a href="#sitemap" data-i18n="foot_sitemap">Sitemap</a></li>
+        <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+        <li><a href="https://www.linkedin.com/in/christoph-rump" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-linkedin"/></svg><span>LinkedIn</span><span class="sr-only" data-i18n="newtab"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+    <p class="disclaimer"><strong data-i18n="disc_label">Disclaimer:</strong> <span data-i18n="disc_text">I am a certified lucid dreaming facilitator, not a medical professional or trained therapist. My offerings are educational and support personal development. They are not therapy or medical treatment and do not replace professional care. Some of my facilitator colleagues work with lucid dreaming within psychotherapy and professional treatment; if that is what you are looking for, I am happy to connect you with them. If you are in treatment or have a health condition, please talk to your doctor or therapist first.</span></p>
+    <p class="copy">© 2026 Christoph Rump</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var I18N = {
+    en: {
+      title: "Christoph Rump – Lucid dreaming workshops and retreats",
+      desc: "Lucid dreaming workshops, retreats and courses with certified facilitator Christoph Rump: mindful day and night routines for calmer days and more conscious nights.",
+      nav_about: "About", nav_offers: "Offerings", nav_events: "Events", nav_contact: "Contact",
+      h1a: "Notice", h1b: "you’re dreaming.",
+      hero_sub: "Lucid dreaming workshops, retreats and courses for calmer days and more conscious nights.",
+      ap_h2: "Day and night are one practice.",
+      ap_day_h: "By day",
+      ap_day_p: "Small, mindful routines for attention, rest and boundaries, so you notice stress and burnout signals early instead of late.",
+      ap_night_statement: "Awareness is the thread between them.",
+      ap_night_h: "By night",
+      ap_night_p1: "Lucid dreaming: recognising that you’re dreaming while it happens, and using that awareness for curiosity, calm and self-regulation.",
+      ap_night_p2: "Dreams are also where our shadows show up, the parts of ourselves we usually avoid. With practice, we can meet them and integrate them.",
+      of_h2: "Ways to learn with me",
+      of_intro: "Everything below is still in planning. Follow along on LinkedIn to hear about dates early.",
+      of1_h: "Online workshop",
+      of1_p: "One session of about 3.5 hours, with a 30-minute break. You learn the foundations and leave with a practice you can start straight away.",
+      of1_m1: "Online", of1_m2: "About 3.5 hours",
+      of2_h: "Workshop on site",
+      of2_p: "The same format in person, with more room to exchange and practise together.",
+      of2_m1: "Zürich and Munich", of2_m2: "About 3.5 hours",
+      of3_h: "Six-week online course",
+      of3_p: "Six weeks of guided practice to build a steady lucid dreaming routine.",
+      of3_m1: "Online", of3_m2: "6 weeks",
+      of4_h: "Weekend retreat: basics",
+      of4_p: "A weekend to go deeper into the foundations, co-led with fellow facilitator Robert.",
+      of4_m1: "In person", of4_m2: "One weekend",
+      of5_h: "Retreat for advanced practitioners",
+      of5_p: "For people who already practise regularly and want to go further. Also co-led with Robert.",
+      of5_m1: "In person", of5_m2: "Planned for later",
+      talks: "Organising an event or community? I’m happy to give a talk on lucid dreaming and mindful day and night routines.",
+      talks_link: "Get in touch",
+      ab_h2: "Hi, I’m Chris.",
+      ab_p1: "I’m a certified lucid dreaming facilitator, trainer and coach, with a background in IT consulting.",
+      ab_p2: "My mission is to help people integrate their shadows in the context of mental health, from stress to burnout, through mindful day and night routines. Lucid dreaming is the frame that holds it together.",
+      ct_h2: "Say hello",
+      ct_p: "Questions, ideas or an event to plan? Message me on LinkedIn.",
+      ct_li: "Message on LinkedIn",
+      ev_h2: "Events",
+      ev_intro: "Workshops, retreats and talks will be listed here as soon as dates are set.",
+      ev_empty_h: "No dates yet",
+      ev_empty_p: "The first dates are still being planned. The quickest way to hear about them is to follow me on LinkedIn or send me a message.",
+      ev_li: "Follow on LinkedIn",
+      imp_h: "Legal notice (Impressum)",
+      imp_law: "Information according to § 5 DDG",
+      imp_contact_h: "Contact",
+      imp_email: "Email:",
+      imp_resp_h: "Responsible for content (§ 18 Abs. 2 MStV)",
+      imp_resp_p: "Christoph Rump, address as above",
+      skip: "Skip to main content",
+      nav_main_aria: "Main", foot_nav_aria: "Footer", lang_aria: "Language",
+      newtab: " (opens in a new tab)",
+      lang_announce: "Language set to English",
+      t_offerings: "Offerings – Christoph Rump", t_events: "Events – Christoph Rump",
+      t_contact: "Contact – Christoph Rump", t_impressum: "Impressum – Christoph Rump", t_sitemap: "Sitemap – Christoph Rump",
+      foot_impressum: "Impressum", foot_sitemap: "Sitemap",
+      sm_h1: "Sitemap", sm_intro: "All pages of this site at a glance.",
+      sm_about_d: "Who I am and how I work with lucid dreaming.",
+      sm_offers_d: "Workshops, courses and retreats.",
+      sm_events_d: "Upcoming dates.",
+      sm_contact_d: "Ways to reach me.",
+      sm_imp_d: "Legal notice.",
+      nl_h: "Newsletter",
+      nl_p: "Occasional notes on lucid dreaming, mindful routines and new dates. Unsubscribe at any time.",
+      nl_label: "Email address", nl_btn: "Subscribe",
+      nl_consent: "I’d like to receive the newsletter by email and understand I can unsubscribe at any time.",
+      nl_err_email: "Error: please enter a valid email address.",
+      nl_err_consent: "Error: please tick the box to confirm you’d like the newsletter.",
+      nl_not_open: "The newsletter isn’t open for sign-ups yet. Please check back soon.",
+      foot_privacy: "Privacy policy", t_privacy: "Privacy policy – Christoph Rump",
+      sm_priv_d: "How your data is handled.",
+      disc_label: "Disclaimer:",
+      disc_text: "I am a certified lucid dreaming facilitator, not a medical professional or trained therapist. My offerings are educational and support personal development. They are not therapy or medical treatment and do not replace professional care. Some of my facilitator colleagues work with lucid dreaming within psychotherapy and professional treatment; if that is what you are looking for, I am happy to connect you with them. If you are in treatment or have a health condition, please talk to your doctor or therapist first.",
+      pv_h1: "Privacy policy",
+      pv_h_ctrl: "Who is responsible",
+      pv_ctrl_p: "The controller is Christoph Rump. Address and email are in the Impressum.",
+      pv_h_host: "Hosting and server logs",
+      pv_host_a: "This site is hosted by",
+      pv_ph_host: "[hosting provider]",
+      pv_host_b: ". When you visit, the server temporarily records technical data such as your IP address, the date and time, and the pages requested. This is needed to deliver and secure the site (Art. 6(1)(f) GDPR).",
+      pv_h_font: "Fonts",
+      pv_font_p: "This site uses the typefaces Bricolage Grotesque and Newsreader.",
+      pv_font_ph: "[Draft note: the preview still loads them from Google Fonts. Self-host the font files before launch and delete this note.]",
+      pv_h_stor: "Cookies and local settings",
+      pv_stor_p: "This site does not use cookies, analytics or tracking. If you choose a language, that choice is saved only in your own browser.",
+      pv_h_nl: "Newsletter",
+      pv_nl_a: "If you subscribe, I use your email address to send you the newsletter. Sending is handled by",
+      pv_ph_nl: "[newsletter provider]",
+      pv_nl_b: ". You confirm your address in a confirmation email (double opt-in) and can unsubscribe at any time using the link in every newsletter. Legal basis: your consent (Art. 6(1)(a) GDPR).",
+      pv_h_li: "Links to other websites",
+      pv_li_p: "Links on this site, such as those to LinkedIn or to scientific studies, are ordinary links. Data is only passed to the other website if you click one, and its own privacy policy then applies.",
+      anim_pause: "Pause animation", anim_play: "Play animation",
+      of6_h: "Introductions to other facilitators",
+      of6_p: "Looking for a particular focus or a therapeutic setting? I can connect you with facilitator colleagues around the world, with different specializations and therapeutic backgrounds.",
+      of6_m1: "Worldwide", of6_m2: "On request",
+      pv_h_intro: "Introductions to facilitator colleagues",
+      pv_intro_p: "If you ask me to connect you with a facilitator colleague, I pass on your name and contact details only with your consent, and only to the colleague concerned. Legal basis: your consent (Art. 6(1)(a) GDPR).",
+      ben_h: "What lucid dreaming can offer",
+      ben_lead: "Once you know you’re dreaming, a lot becomes possible. These are some of the most common reasons people practise it.",
+      ben1: "Psychological healing", ben2: "PTSD treatment", ben_sub: "In a therapeutic setting",
+      ben3: "Asking big questions", ben4: "Exploring the unconscious mind", ben5: "Inner child work",
+      ben6: "Shadow integration", ben7: "Imaginary rehearsal", ben8: "Simply having fun",
+      ben_note: "Healing and trauma work belong with qualified professionals. My offerings are not therapy, but I can introduce you to facilitator colleagues who work within one.",
+      ben_note_link: "See the introductions",
+      nav_background: "Lucid Dreaming", t_lucid_dreaming: "Lucid dreaming – Christoph Rump",
+      sm_bg_d: "What lucid dreaming is, and what research says.",
+      bg_h1: "What is lucid dreaming?",
+      bg_lead: "Lucid dreaming can sound abstract. It has been studied in sleep laboratories for over 40 years.",
+      bg1_h: "A practice with deep roots",
+      bg1_p: "Lucid dreaming is practised as a form of Dream Yoga, a contemplative way of working with awareness in sleep. Science followed in the 1970s and 1980s: Keith Hearne and Stephen LaBerge showed in sleep laboratories that dreamers can know they are dreaming and signal it from inside the dream.",
+      bg2_h: "What is different from ordinary dreams?",
+      bg3_h: "Studies to start with",
+      st1_t: "Metacognitive Mechanisms Underlying Lucid Dreaming",
+      st1_s: "Filevich et al., Journal of Neuroscience, 2015 (in English)",
+      st2_t: "The seat of meta-consciousness in the brain",
+      st2_s: "Max Planck Society press release on a study in Sleep, 2012 (in English)",
+      bg4_h: "Reading and online material",
+      bk1: "Stephen LaBerge and Howard Rheingold: Exploring the World of Lucid Dreaming",
+      bk2: "Tenzin Wangyal Rinpoche: The Tibetan Yogas of Dream and Sleep",
+      bk3: "Robert Waggoner: Lucid Dreaming: Gateway to the Inner Self",
+      bg_cta_p: "This is only the start. In the workshops we turn it into practice.",
+      bg_cta_btn: "See the offerings",
+      bg2_p1: "In an ordinary dream we live through scenes and emotions without questioning them. Parts of the prefrontal cortex, at the front of the brain, are less active during REM sleep, when most vivid dreams happen. This is thought to be one reason we accept even the strangest events without a second thought.",
+      bg2_p2: "In a lucid dream, activity in these regions rises markedly within seconds. Researchers found it in the dorsolateral and frontopolar prefrontal cortex and in the precuneus. These are areas typically active when we are awake and reflect on ourselves, keep track of our own thoughts and make deliberate decisions.",
+      bg2_p3: "What does that indicate? Lucidity is not a vague feeling but a measurable state in which waking-type self-awareness appears inside a dream. The dreamer is still asleep and still dreaming, yet can reflect, remember an intention and choose how to act.",
+      bg2_p4: "A 2015 study points the same way: people with high dream lucidity had more gray matter in the frontopolar cortex, a region that is active when we monitor our own thoughts while awake. This suggests a link between lucid dreaming and metacognition, the ability to think about your own thinking.",
+      bg2_note: "A simplified summary of the studies listed below.",
+      bk0_a: "Charlie Morley", bk0_t: ": Dreams of Awakening, Dreaming Through Darkness, Wake Up to Sleep",
+      pv_h_rights: "Your rights",
+      pv_rights_p: "You have the right to access, correction, deletion, restriction of processing, data portability and objection, and you can withdraw consent at any time. You can also complain to a data protection authority. To exercise your rights, contact me using the details in the Impressum."
+    },
+    de: {
+      title: "Christoph Rump – Workshops und Retreats zum luziden Träumen",
+      desc: "Workshops, Retreats und Kurse zum luziden Träumen mit dem zertifizierten Facilitator Christoph Rump: achtsame Tages- und Nachtroutinen für ruhigere Tage und bewusstere Nächte.",
+      nav_about: "Über mich", nav_offers: "Angebote", nav_events: "Termine", nav_contact: "Kontakt",
+      h1a: "Bemerke,", h1b: "dass du träumst.",
+      hero_sub: "Workshops, Retreats und Kurse zum luziden Träumen, für ruhigere Tage und bewusstere Nächte.",
+      ap_h2: "Tag und Nacht sind eine Praxis.",
+      ap_day_h: "Tagsüber",
+      ap_day_p: "Kleine, achtsame Routinen für Aufmerksamkeit, Erholung und Grenzen, damit du Stress und Burnout-Signale früh bemerkst statt spät.",
+      ap_night_statement: "Bewusstheit verbindet beide.",
+      ap_night_h: "Nachts",
+      ap_night_p1: "Luzides Träumen: während des Traums erkennen, dass du träumst, und dieses Bewusstsein für Neugier, Ruhe und Selbstregulation nutzen.",
+      ap_night_p2: "Träume sind auch der Ort, an dem unsere Schatten auftauchen, die Anteile von uns, denen wir sonst ausweichen. Mit Übung können wir ihnen begegnen und sie integrieren.",
+      of_h2: "So lernen wir gemeinsam",
+      of_intro: "Alles hier ist noch in Planung. Folge mir auf LinkedIn, um Termine früh zu erfahren.",
+      of1_h: "Online-Workshop",
+      of1_p: "Eine Session von etwa 3,5 Stunden inklusive 30 Minuten Pause. Du lernst die Grundlagen und gehst mit einer Praxis nach Hause, die du sofort beginnen kannst.",
+      of1_m1: "Online", of1_m2: "Etwa 3,5 Stunden",
+      of2_h: "Workshop vor Ort",
+      of2_p: "Dasselbe Format in Präsenz, mit mehr Raum für Austausch und gemeinsames Üben.",
+      of2_m1: "Zürich und München", of2_m2: "Etwa 3,5 Stunden",
+      of3_h: "Sechs-Wochen-Onlinekurs",
+      of3_p: "Sechs Wochen begleitete Praxis, um eine stabile Routine im luziden Träumen aufzubauen.",
+      of3_m1: "Online", of3_m2: "6 Wochen",
+      of4_h: "Wochenend-Retreat: Grundlagen",
+      of4_p: "Ein Wochenende, um die Grundlagen zu vertiefen, gemeinsam geleitet mit Facilitator-Kollege Robert.",
+      of4_m1: "Vor Ort", of4_m2: "Ein Wochenende",
+      of5_h: "Retreat für Fortgeschrittene",
+      of5_p: "Für alle, die schon regelmäßig üben und weiter gehen möchten. Ebenfalls gemeinsam mit Robert.",
+      of5_m1: "Vor Ort", of5_m2: "Geplant für später",
+      talks: "Du organisierst eine Veranstaltung oder Community? Ich halte gern einen Vortrag über luzides Träumen und achtsame Tages- und Nachtroutinen.",
+      talks_link: "Melde dich",
+      ab_h2: "Hallo, ich bin Chris.",
+      ab_p1: "Ich bin zertifizierter Lucid-Dreaming-Facilitator, Trainer und Coach und komme aus der IT-Beratung.",
+      ab_p2: "Meine Mission ist es, Menschen dabei zu helfen, ihre Schatten im Kontext mentaler Gesundheit zu integrieren, von Stress bis Burnout, mit achtsamen Tages- und Nachtroutinen. Luzides Träumen ist der Rahmen, der alles zusammenhält.",
+      ct_h2: "Sag hallo",
+      ct_p: "Fragen, Ideen oder eine Veranstaltung in Planung? Schreib mir auf LinkedIn.",
+      ct_li: "Auf LinkedIn schreiben",
+      ev_h2: "Termine",
+      ev_intro: "Workshops, Retreats und Vorträge erscheinen hier, sobald die Termine feststehen.",
+      ev_empty_h: "Noch keine Termine",
+      ev_empty_p: "Die ersten Termine sind noch in Planung. Am schnellsten erfährst du davon, wenn du mir auf LinkedIn folgst oder mir schreibst.",
+      ev_li: "Auf LinkedIn folgen",
+      imp_h: "Impressum",
+      imp_law: "Angaben gemäß § 5 DDG",
+      imp_contact_h: "Kontakt",
+      imp_email: "E-Mail:",
+      imp_resp_h: "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV",
+      imp_resp_p: "Christoph Rump, Anschrift wie oben",
+      skip: "Zum Hauptinhalt springen",
+      nav_main_aria: "Hauptnavigation", foot_nav_aria: "Fußbereich", lang_aria: "Sprache",
+      newtab: " (öffnet in neuem Tab)",
+      lang_announce: "Sprache auf Deutsch gestellt",
+      t_offerings: "Angebote – Christoph Rump", t_events: "Termine – Christoph Rump",
+      t_contact: "Kontakt – Christoph Rump", t_impressum: "Impressum – Christoph Rump", t_sitemap: "Sitemap – Christoph Rump",
+      foot_impressum: "Impressum", foot_sitemap: "Sitemap",
+      sm_h1: "Sitemap", sm_intro: "Alle Seiten dieser Website auf einen Blick.",
+      sm_about_d: "Wer ich bin und wie ich mit luzidem Träumen arbeite.",
+      sm_offers_d: "Workshops, Kurse und Retreats.",
+      sm_events_d: "Kommende Termine.",
+      sm_contact_d: "So erreichst du mich.",
+      sm_imp_d: "Rechtliche Angaben.",
+      nl_h: "Newsletter",
+      nl_p: "Gelegentliche Impulse zu luzidem Träumen, achtsamen Routinen und neuen Terminen. Jederzeit abbestellbar.",
+      nl_label: "E-Mail-Adresse", nl_btn: "Abonnieren",
+      nl_consent: "Ich möchte den Newsletter per E-Mail erhalten und weiß, dass ich mich jederzeit abmelden kann.",
+      nl_err_email: "Fehler: Bitte gib eine gültige E-Mail-Adresse ein.",
+      nl_err_consent: "Fehler: Bitte bestätige das Kästchen, um den Newsletter zu erhalten.",
+      nl_not_open: "Die Anmeldung zum Newsletter ist noch nicht geöffnet. Bitte schau bald wieder vorbei.",
+      foot_privacy: "Datenschutz", t_privacy: "Datenschutz – Christoph Rump",
+      sm_priv_d: "Wie mit deinen Daten umgegangen wird.",
+      disc_label: "Disclaimer:",
+      disc_text: "Ich bin zertifizierter Lucid-Dreaming-Facilitator, aber keine medizinische Fachkraft und kein ausgebildeter Therapeut. Meine Angebote dienen der Bildung und Persönlichkeitsentwicklung. Sie sind keine Therapie oder medizinische Behandlung und ersetzen keine professionelle Betreuung. Einige meiner Facilitator-Kolleginnen und -Kollegen arbeiten mit luzidem Träumen im Rahmen von Psychotherapie und professioneller Behandlung; wenn du das suchst, bringe ich dich gern mit ihnen in Kontakt. Wenn du in Behandlung bist oder gesundheitliche Beschwerden hast, sprich bitte vorher mit deiner behandelnden Fachperson.",
+      pv_h1: "Datenschutzerklärung",
+      pv_h_ctrl: "Verantwortlicher",
+      pv_ctrl_p: "Verantwortlich ist Christoph Rump. Anschrift und E-Mail stehen im Impressum.",
+      pv_h_host: "Hosting und Server-Logfiles",
+      pv_host_a: "Diese Website wird gehostet bei",
+      pv_ph_host: "[Hosting-Anbieter]",
+      pv_host_b: ". Beim Aufruf speichert der Server vorübergehend technische Daten wie deine IP-Adresse, Datum und Uhrzeit sowie die aufgerufenen Seiten. Das ist nötig, um die Website auszuliefern und abzusichern (Art. 6 Abs. 1 lit. f DSGVO).",
+      pv_h_font: "Schriften",
+      pv_font_p: "Diese Website verwendet die Schriften Bricolage Grotesque und Newsreader.",
+      pv_font_ph: "[Entwurfshinweis: In der Vorschau werden sie noch von Google Fonts geladen. Vor dem Livegang lokal einbinden und diesen Hinweis löschen.]",
+      pv_h_stor: "Cookies und lokale Einstellungen",
+      pv_stor_p: "Diese Website verwendet keine Cookies, keine Analyse- und keine Tracking-Tools. Wenn du eine Sprache wählst, wird diese Wahl nur in deinem eigenen Browser gespeichert.",
+      pv_h_nl: "Newsletter",
+      pv_nl_a: "Wenn du dich anmeldest, verwende ich deine E-Mail-Adresse, um dir den Newsletter zu senden. Den Versand übernimmt",
+      pv_ph_nl: "[Newsletter-Anbieter]",
+      pv_nl_b: ". Du bestätigst deine Adresse in einer Bestätigungs-E-Mail (Double-Opt-in) und kannst dich jederzeit über den Link in jedem Newsletter abmelden. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).",
+      pv_h_li: "Links zu anderen Websites",
+      pv_li_p: "Links auf dieser Website, etwa zu LinkedIn oder zu wissenschaftlichen Studien, sind einfache Links. Daten werden nur an die andere Website übermittelt, wenn du einen Link anklickst, und dort gilt dann deren eigene Datenschutzerklärung.",
+      anim_pause: "Animation pausieren", anim_play: "Animation abspielen",
+      of6_h: "Vermittlung zu Facilitator-Kolleginnen und -Kollegen",
+      of6_p: "Du suchst einen bestimmten Schwerpunkt oder einen therapeutischen Rahmen? Ich bringe dich mit Facilitator-Kolleginnen und -Kollegen weltweit in Kontakt, mit unterschiedlichen Spezialisierungen und therapeutischen Hintergründen.",
+      of6_m1: "Weltweit", of6_m2: "Auf Anfrage",
+      pv_h_intro: "Vermittlung an Facilitator-Kolleginnen und -Kollegen",
+      pv_intro_p: "Wenn du mich bittest, dich mit einer Facilitator-Kollegin oder einem Facilitator-Kollegen in Kontakt zu bringen, gebe ich deinen Namen und deine Kontaktdaten nur mit deiner Einwilligung weiter, und nur an die betreffende Person. Rechtsgrundlage: deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).",
+      ben_h: "Was luzides Träumen bieten kann",
+      ben_lead: "Wenn du weißt, dass du träumst, wird vieles möglich. Das sind einige der häufigsten Gründe, warum Menschen es üben.",
+      ben1: "Psychische Heilung", ben2: "PTBS-Behandlung", ben_sub: "Im therapeutischen Rahmen",
+      ben3: "Große Fragen stellen", ben4: "Das Unbewusste erkunden", ben5: "Arbeit mit dem inneren Kind",
+      ben6: "Schattenintegration", ben7: "Situationen im Traum üben", ben8: "Einfach Spaß haben",
+      ben_note: "Heilung und Traumaarbeit gehören in die Hände qualifizierter Fachpersonen. Meine Angebote sind keine Therapie, aber ich kann dich mit Facilitator-Kolleginnen und -Kollegen in Kontakt bringen, die in einem therapeutischen Rahmen arbeiten.",
+      ben_note_link: "Zu den Vermittlungen",
+      nav_background: "Luzides Träumen", t_lucid_dreaming: "Luzides Träumen – Christoph Rump",
+      sm_bg_d: "Was luzides Träumen ist und was die Forschung sagt.",
+      bg_h1: "Was ist luzides Träumen?",
+      bg_lead: "Luzides Träumen klingt vielleicht abstrakt. Es wird seit über 40 Jahren in Schlaflaboren erforscht.",
+      bg1_h: "Eine Praxis mit tiefen Wurzeln",
+      bg1_p: "Luzides Träumen wird als Form des Dream Yoga praktiziert, einem kontemplativen Weg, im Schlaf mit Bewusstheit zu arbeiten. Die Wissenschaft folgte in den 1970er- und 1980er-Jahren: Keith Hearne und Stephen LaBerge zeigten in Schlaflaboren, dass Träumende wissen können, dass sie träumen, und dies aus dem Traum heraus signalisieren können.",
+      bg2_h: "Was unterscheidet es von gewöhnlichen Träumen?",
+      bg3_h: "Studien zum Einstieg",
+      st1_t: "Metacognitive Mechanisms Underlying Lucid Dreaming",
+      st1_s: "Filevich et al., Journal of Neuroscience, 2015 (auf Englisch)",
+      st2_t: "The seat of meta-consciousness in the brain",
+      st2_s: "Pressemitteilung der Max-Planck-Gesellschaft zu einer Studie in Sleep, 2012 (auf Englisch)",
+      bg4_h: "Lesen und Online-Material",
+      bk1: "Stephen LaBerge and Howard Rheingold: Exploring the World of Lucid Dreaming",
+      bk2: "Tenzin Wangyal Rinpoche: The Tibetan Yogas of Dream and Sleep",
+      bk3: "Robert Waggoner: Lucid Dreaming: Gateway to the Inner Self",
+      bg_cta_p: "Das ist erst der Anfang. In den Workshops machen wir daraus Praxis.",
+      bg_cta_btn: "Angebote ansehen",
+      bg2_p1: "In einem gewöhnlichen Traum erleben wir Szenen und Gefühle, ohne sie zu hinterfragen. Teile des präfrontalen Kortex im vorderen Teil des Gehirns sind im REM-Schlaf, in dem die meisten lebhaften Träume stattfinden, weniger aktiv. Man vermutet, dass wir deshalb selbst die seltsamsten Ereignisse ohne Zögern hinnehmen.",
+      bg2_p2: "In einem luziden Traum steigt die Aktivität in diesen Regionen innerhalb weniger Sekunden deutlich an. Forschende fanden das im dorsolateralen und frontopolaren präfrontalen Kortex sowie im Precuneus. Das sind Areale, die typischerweise im Wachzustand aktiv sind, wenn wir über uns selbst nachdenken, unsere eigenen Gedanken verfolgen und bewusste Entscheidungen treffen.",
+      bg2_p3: "Was bedeutet das? Luzidität ist kein vages Gefühl, sondern ein messbarer Zustand, in dem eine Selbstwahrnehmung, wie wir sie vom Wachsein kennen, mitten im Traum auftaucht. Die träumende Person schläft weiter und träumt weiter, kann aber nachdenken, sich an eine Absicht erinnern und entscheiden, wie sie handelt.",
+      bg2_p4: "Eine Studie von 2015 weist in dieselbe Richtung: Menschen mit stark ausgeprägter Traumluzidität hatten mehr graue Substanz im frontopolaren Kortex, einer Region, die aktiv ist, wenn wir im Wachzustand unsere eigenen Gedanken beobachten. Das deutet auf einen Zusammenhang zwischen luzidem Träumen und Metakognition hin, der Fähigkeit, über das eigene Denken nachzudenken.",
+      bg2_note: "Eine vereinfachte Zusammenfassung der unten aufgeführten Studien.",
+      bk0_a: "Charlie Morley", bk0_t: ": Dreams of Awakening, Dreaming Through Darkness, Wake Up to Sleep",
+      pv_h_rights: "Deine Rechte",
+      pv_rights_p: "Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch und kannst deine Einwilligung jederzeit widerrufen. Du kannst dich außerdem bei einer Datenschutzaufsichtsbehörde beschweren. Um deine Rechte auszuüben, wende dich an mich über die Angaben im Impressum."
+    }
+  };
+
+  var currentLang = "en", activeRoute = "about", statusKey = "";
+  var nlStatus = null;
+
+  function updateTitle() {
+    var d = I18N[currentLang] || I18N.en;
+    document.title = activeRoute === "about" ? d.title : d["t_" + activeRoute.replace(/-/g, "_")];
+  }
+  function reapplyStatus() {
+    if (statusKey && nlStatus) nlStatus.textContent = I18N[currentLang][statusKey];
+  }
+
+  function setLang(lang, announce) {
+    var dict = I18N[lang] || I18N.en;
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n-aria]").forEach(function (el) {
+      var v = dict[el.getAttribute("data-i18n-aria")];
+      if (v != null) el.setAttribute("aria-label", v);
+    });
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var v = dict[el.getAttribute("data-i18n")];
+      if (v != null) el.textContent = v;
+    });
+    document.querySelectorAll(".lang-btn").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang));
+    });
+    currentLang = lang;
+    updateTitle();
+    reapplyStatus();
+    var meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", dict.desc);
+    if (announce) {
+      var live = document.getElementById("announce");
+      live.textContent = "";
+      setTimeout(function () { live.textContent = dict.lang_announce; }, 50);
+    }
+    try { localStorage.setItem("lang", lang); } catch (e) {}
+  }
+
+  document.querySelectorAll(".lang-btn").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.getAttribute("data-lang"), true); });
+  });
+
+  var initial = "en";
+  try {
+    var saved = localStorage.getItem("lang");
+    if (saved === "en" || saved === "de") initial = saved;
+    else if ((navigator.language || "").toLowerCase().indexOf("de") === 0) initial = "de";
+  } catch (e) {
+    if ((navigator.language || "").toLowerCase().indexOf("de") === 0) initial = "de";
+  }
+  if (initial !== "en") setLang(initial);
+
+  // Pages: one view at a time, chosen by the URL hash
+  var ROUTES = ["about", "lucid-dreaming", "offerings", "events", "contact", "impressum", "privacy", "sitemap"];
+  function currentRoute() {
+    var h = (location.hash || "").replace("#", "");
+    return ROUTES.indexOf(h) > -1 ? h : "about";
+  }
+  function showRoute(route, moveFocus) {
+    ROUTES.forEach(function (r) { document.getElementById("view-" + r).hidden = (r !== route); });
+    activeRoute = route;
+    updateTitle();
+    document.querySelectorAll(".tabs a").forEach(function (a) {
+      if (a.getAttribute("data-route") === route) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+    window.scrollTo(0, 0);
+    if (moveFocus) {
+      var heading = document.querySelector("#view-" + route + " [tabindex='-1']");
+      if (heading) heading.focus({ preventScroll: true });
+    }
+  }
+  window.addEventListener("hashchange", function () {
+    var h = (location.hash || "").replace("#", "");
+    if (ROUTES.indexOf(h) === -1) return;
+    showRoute(h, true);
+  });
+  showRoute(currentRoute(), false);
+
+  // Skip link: jump to the main content without changing the page
+  document.querySelector(".skip").addEventListener("click", function (e) {
+    e.preventDefault();
+    document.getElementById("main").focus();
+  });
+
+  // Newsletter sign-up. Paste the form URL from your newsletter provider below.
+  // While it is empty, the form validates but shows an honest "not open yet" message.
+  var NEWSLETTER_ENDPOINT = "";
+  var nlForm = document.getElementById("nl-form");
+  var nlEmail = document.getElementById("nl-email");
+  var nlConsent = document.getElementById("nl-consent");
+  nlStatus = document.getElementById("nl-status");
+
+  function setStatus(key, isError) {
+    statusKey = key;
+    nlStatus.setAttribute("data-state", isError ? "error" : "info");
+    nlStatus.textContent = key ? I18N[currentLang][key] : "";
+  }
+
+  nlForm.addEventListener("submit", function (e) {
+    var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(nlEmail.value.trim());
+    nlEmail.removeAttribute("aria-invalid");
+    nlConsent.removeAttribute("aria-invalid");
+    if (!ok) {
+      e.preventDefault();
+      nlEmail.setAttribute("aria-invalid", "true");
+      setStatus("nl_err_email", true);
+      nlEmail.focus();
+      return;
+    }
+    if (!nlConsent.checked) {
+      e.preventDefault();
+      nlConsent.setAttribute("aria-invalid", "true");
+      setStatus("nl_err_consent", true);
+      nlConsent.focus();
+      return;
+    }
+    if (!NEWSLETTER_ENDPOINT) {
+      e.preventDefault();
+      setStatus("nl_not_open", false);
+      return;
+    }
+    nlForm.setAttribute("action", NEWSLETTER_ENDPOINT);
+  });
+
+  // Stars: a fixed pseudo-random sky so it looks the same on every visit
+  var stars = document.getElementById("stars");
+  var seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  for (var i = 0; i < 46; i++) {
+    var s = document.createElement("span");
+    var size = rnd() < 0.15 ? 2.5 : 1.5;
+    s.style.cssText = "left:" + (rnd() * 100).toFixed(1) + "%;top:" + (rnd() * 72).toFixed(1) +
+      "%;width:" + size + "px;height:" + size + "px;opacity:" + (0.35 + rnd() * 0.55).toFixed(2);
+    stars.appendChild(s);
+  }
+
+  // Water motion: flows by default, can be paused, and is still for reduced-motion users
+  var animBtn = document.getElementById("anim-toggle");
+  var filterSvg = document.querySelector('body > svg[aria-hidden="true"]');
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion) {
+    document.querySelectorAll("#ripple animate").forEach(function (a) { a.remove(); });
+    animBtn.hidden = true;
+  } else {
+    var paused = false;
+    animBtn.addEventListener("click", function () {
+      paused = !paused;
+      if (filterSvg) { if (paused) filterSvg.pauseAnimations(); else filterSvg.unpauseAnimations(); }
+      var key = paused ? "anim_play" : "anim_pause";
+      animBtn.setAttribute("data-i18n", key);
+      animBtn.textContent = I18N[currentLang][key];
+    });
+  }
+})();
+</script>
+</body>
+</html>
