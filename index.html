@@ -1279,7 +1279,7 @@ button.btn { cursor: pointer; }
       method: "POST",
       headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY },
       body: JSON.stringify(body)
-    }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); });
+    }).then(function (r) { if (!r.ok) return r.text().then(function (t) { var m = ""; try { var j = JSON.parse(t); m = j.msg || j.message || j.error_description || ""; } catch (x) { } var e = new Error(m || ("HTTP " + r.status)); e.status = r.status; throw e; }); return r.text(); });
   }
   function showNewsletter(key, isError) {
     setStatus(key, isError);
@@ -1333,7 +1333,7 @@ button.btn { cursor: pointer; }
         return supa("/auth/v1/otp?redirect_to=" + encodeURIComponent(back), { email: email, create_user: true });
       })
       .then(function () { setStatus("nl_check_mail", false); nlForm.reset(); })
-      .catch(function () { setStatus("nl_err_send", true); })
+      .catch(function (err) { setStatus("nl_err_send", true); nlStatus.textContent += " (" + err.message + ")"; })
       .then(function () { btn.disabled = false; });
   });
 
@@ -1358,7 +1358,7 @@ button.btn { cursor: pointer; }
       method: method,
       headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + (token || SUPABASE_ANON_KEY) },
       body: body ? JSON.stringify(body) : undefined
-    }).then(function (r) { if (!r.ok) { var e = new Error("HTTP " + r.status); e.status = r.status; throw e; } return r.json(); });
+    }).then(function (r) { if (!r.ok) return r.text().then(function (t) { var m = ""; try { var j = JSON.parse(t); m = j.msg || j.message || j.error_description || ""; } catch (x) { } var e = new Error(m || ("HTTP " + r.status)); e.status = r.status; throw e; }); return r.json(); });
   }
   // a valid access token, refreshed when it is about to expire
   function mbToken() {
@@ -1427,7 +1427,7 @@ button.btn { cursor: pointer; }
     var back = location.origin + location.pathname + "?login=members";
     api("POST", "/auth/v1/otp?redirect_to=" + encodeURIComponent(back), null, { email: email, create_user: true })
       .then(function () { mbSet("mb_sent", false); mbForm.reset(); })
-      .catch(function () { mbSet("mb_err", true); });
+      .catch(function (err) { mbSet("mb_err", true); mbStatus.textContent += " (" + err.message + ")"; });
   });
   document.getElementById("mb-logout").addEventListener("click", function (e) {
     e.preventDefault(); mbSave(null); mbSet("", false); mbShow();
