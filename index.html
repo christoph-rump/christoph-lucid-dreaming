@@ -448,6 +448,8 @@ button.btn { cursor: pointer; }
 .check label { color: var(--night-muted); font-size: 1rem; line-height: 1.5; }
 [aria-invalid="true"] { border-color: #FFB4A8; }
 .check input[aria-invalid="true"] { outline: 2px solid #FFB4A8; outline-offset: 2px; }
+#mb-area a { color: inherit; text-underline-offset: .2em; }
+#mb-lessons .lesson { margin: 2rem 0; }
 .nl-status { margin: .75rem 0 0; min-height: 1.6em; color: var(--night-ink); }
 .newsletter .nl-status[data-state="error"] { color: #FFB4A8; }
 
@@ -730,6 +732,29 @@ button.btn { cursor: pointer; }
       </div>
     </div>
   </section>
+  <section id="view-members" class="view page-day on-day" hidden aria-labelledby="mb-h1">
+    <div class="wrap">
+      <h1 class="statement" id="mb-h1" tabindex="-1" data-i18n="mb_h1">Members</h1>
+      <div id="mb-login">
+        <p class="lead" data-i18n="mb_intro">Booked a course? Log in with your email address — you get a link, no password needed.</p>
+        <form class="nl-form" id="mb-form" novalidate>
+          <div class="field">
+            <label for="mb-email" data-i18n="nl_label">Email address</label>
+            <div class="field-row">
+              <input id="mb-email" type="email" inputmode="email" autocomplete="email" required aria-describedby="mb-status">
+              <button class="btn btn-primary" type="submit" data-i18n="mb_btn">Send login link</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div id="mb-area" hidden>
+        <p class="lead"><span data-i18n="mb_hello">Logged in as</span> <strong id="mb-who"></strong> · <a href="#members" id="mb-logout" data-i18n="mb_logout">Log out</a></p>
+        <div id="mb-lessons"></div>
+      </div>
+      <p id="mb-status" class="nl-status" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
   <section id="view-impressum" class="view page-day on-day" hidden aria-labelledby="imp-h1">
     <div class="wrap">
       <h1 class="statement" id="imp-h1" tabindex="-1" data-i18n="imp_h">Legal notice (Impressum)</h1>
@@ -762,6 +787,7 @@ button.btn { cursor: pointer; }
         <li><a href="#contact" data-i18n="nav_contact">Contact</a><p data-i18n="sm_contact_d">Ways to reach me.</p></li>
         <li><a href="#impressum" data-i18n="foot_impressum">Impressum</a><p data-i18n="sm_imp_d">Legal notice.</p></li>
         <li><a href="#privacy" data-i18n="foot_privacy">Privacy policy</a><p data-i18n="sm_priv_d">How your data is handled.</p></li>
+        <li><a href="#members" data-i18n="mb_h1">Members</a><p data-i18n="sm_mb_d">Course area for participants (login).</p></li>
       </ul>
     </div>
   </section>
@@ -838,6 +864,7 @@ button.btn { cursor: pointer; }
         <li><a href="#privacy" data-i18n="foot_privacy">Privacy policy</a></li>
         <li><a href="#sitemap" data-i18n="foot_sitemap">Sitemap</a></li>
         <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+        <li><a href="#members" data-i18n="mb_h1">Members</a></li>
         <li><a href="https://www.linkedin.com/in/christoph-rump" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="#icon-linkedin"/></svg><span>LinkedIn</span><span class="sr-only" data-i18n="newtab"> (opens in a new tab)</span></a></li>
       </ul>
     </nav>
@@ -904,6 +931,16 @@ button.btn { cursor: pointer; }
       lang_announce: "Language set to English",
       t_offerings: "Offerings – Christoph Rump", t_events: "Events – Christoph Rump",
       t_contact: "Contact – Christoph Rump", t_impressum: "Impressum – Christoph Rump", t_sitemap: "Sitemap – Christoph Rump",
+      t_members: "Members – Christoph Rump", mb_h1: "Members",
+      mb_intro: "Booked a course? Log in with your email address — you get a link, no password needed.",
+      mb_btn: "Send login link", mb_hello: "Logged in as", mb_logout: "Log out",
+      mb_sent: "Check your inbox: click the link in the email to log in.",
+      mb_loading: "Loading your courses…",
+      mb_none: "You’re logged in, but no course is unlocked for this address yet. If you’ve booked one, it will be unlocked soon.",
+      mb_err: "Error: that didn’t work. Please try again in a moment.",
+      mb_closed: "The members area isn’t open yet.",
+      mb_expired: "Your login has expired. Please request a new link.",
+      sm_mb_d: "Course area for participants (login).",
       foot_impressum: "Impressum", foot_sitemap: "Sitemap",
       sm_h1: "Sitemap", sm_intro: "All pages of this site at a glance.",
       sm_about_d: "Who I am and how I work with lucid dreaming.",
@@ -1041,6 +1078,16 @@ button.btn { cursor: pointer; }
       lang_announce: "Sprache auf Deutsch gestellt",
       t_offerings: "Angebote – Christoph Rump", t_events: "Termine – Christoph Rump",
       t_contact: "Kontakt – Christoph Rump", t_impressum: "Impressum – Christoph Rump", t_sitemap: "Sitemap – Christoph Rump",
+      t_members: "Mitglieder – Christoph Rump", mb_h1: "Mitglieder",
+      mb_intro: "Kurs gebucht? Melde dich mit deiner E-Mail-Adresse an — du bekommst einen Link, kein Passwort nötig.",
+      mb_btn: "Login-Link senden", mb_hello: "Angemeldet als", mb_logout: "Abmelden",
+      mb_sent: "Schau in dein Postfach: Klicke auf den Link in der E-Mail, um dich anzumelden.",
+      mb_loading: "Deine Kurse werden geladen…",
+      mb_none: "Du bist angemeldet, aber für diese Adresse ist noch kein Kurs freigeschaltet. Wenn du einen gebucht hast, wird er bald freigeschaltet.",
+      mb_err: "Fehler: Das hat nicht geklappt. Bitte versuche es gleich noch einmal.",
+      mb_closed: "Der Mitgliederbereich ist noch nicht geöffnet.",
+      mb_expired: "Deine Anmeldung ist abgelaufen. Bitte fordere einen neuen Link an.",
+      sm_mb_d: "Kursbereich für Teilnehmende (Login).",
       foot_impressum: "Impressum", foot_sitemap: "Sitemap",
       sm_h1: "Sitemap", sm_intro: "Alle Seiten dieser Website auf einen Blick.",
       sm_about_d: "Wer ich bin und wie ich mit luzidem Träumen arbeite.",
@@ -1125,7 +1172,7 @@ button.btn { cursor: pointer; }
     }
   };
 
-  var currentLang = "en", activeRoute = "about", statusKey = "";
+  var currentLang = "en", activeRoute = "about", statusKey = "", mbKey = "", mbStatus = null;
   var nlStatus = null;
 
   function updateTitle() {
@@ -1134,6 +1181,7 @@ button.btn { cursor: pointer; }
   }
   function reapplyStatus() {
     if (statusKey && nlStatus) nlStatus.textContent = I18N[currentLang][statusKey];
+    if (mbKey && mbStatus) mbStatus.textContent = I18N[currentLang][mbKey];
   }
 
   function setLang(lang, announce) {
@@ -1178,7 +1226,7 @@ button.btn { cursor: pointer; }
   if (initial !== "en") setLang(initial);
 
   // Pages: one view at a time, chosen by the URL hash
-  var ROUTES = ["about", "lucid-dreaming", "offerings", "events", "contact", "impressum", "privacy", "sitemap"];
+  var ROUTES = ["about", "lucid-dreaming", "offerings", "events", "contact", "impressum", "privacy", "sitemap", "members"];
   function currentRoute() {
     var h = (location.hash || "").replace("#", "");
     return ROUTES.indexOf(h) > -1 ? h : "about";
@@ -1249,7 +1297,7 @@ button.btn { cursor: pointer; }
         .catch(function () { showNewsletter("nl_err_send", true); });
     } else if (/error_description=/.test(h)) {
       clean(); showNewsletter("nl_err_link", true);
-    } else if (/access_token=/.test(h)) {
+    } else if (/access_token=/.test(h) && !/[?&]login=members/.test(location.search)) {
       clean(); showNewsletter("nl_confirmed", false);   // the token is not kept: this page has no login
     }
   })();
@@ -1288,6 +1336,104 @@ button.btn { cursor: pointer; }
       .catch(function () { setStatus("nl_err_send", true); })
       .then(function () { btn.disabled = false; });
   });
+
+  // Members area (B-015c): email-link login; lessons and videos come from Supabase and are only
+  // readable for addresses on your `members` list (row-level security). No passwords, no payments here.
+  mbStatus = document.getElementById("mb-status");
+  var mbForm = document.getElementById("mb-form"), mbEmail = document.getElementById("mb-email");
+  var mbLogin = document.getElementById("mb-login"), mbArea = document.getElementById("mb-area");
+  var mbLessons = document.getElementById("mb-lessons");
+  function mbSet(key, isError) {
+    mbKey = key;
+    mbStatus.setAttribute("data-state", isError ? "error" : "info");
+    mbStatus.textContent = key ? I18N[currentLang][key] : "";
+  }
+  function mbLoad() { try { return JSON.parse(localStorage.getItem("mb_session") || "null"); } catch (e) { return null; } }
+  function mbSave(v) { try { if (v) localStorage.setItem("mb_session", JSON.stringify(v)); else localStorage.removeItem("mb_session"); } catch (e) { } }
+  function jwtEmail(t) {
+    try { return JSON.parse(atob(t.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))).email || ""; } catch (e) { return ""; }
+  }
+  function api(method, path, token, body) {
+    return fetch(SUPABASE_URL.replace(/\/$/, "") + path, {
+      method: method,
+      headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + (token || SUPABASE_ANON_KEY) },
+      body: body ? JSON.stringify(body) : undefined
+    }).then(function (r) { if (!r.ok) { var e = new Error("HTTP " + r.status); e.status = r.status; throw e; } return r.json(); });
+  }
+  // a valid access token, refreshed when it is about to expire
+  function mbToken() {
+    var ses = mbLoad();
+    if (!ses) return Promise.reject(new Error("no session"));
+    if (ses.expires_at * 1000 > Date.now() + 60000) return Promise.resolve(ses.access_token);
+    return api("POST", "/auth/v1/token?grant_type=refresh_token", null, { refresh_token: ses.refresh_token }).then(function (n) {
+      mbSave({ access_token: n.access_token, refresh_token: n.refresh_token, expires_at: Math.floor(Date.now() / 1000) + n.expires_in, email: ses.email });
+      return n.access_token;
+    });
+  }
+  function para(text) {
+    var frag = document.createDocumentFragment();
+    String(text || "").split(/\n\s*\n/).forEach(function (t) { if (t.trim()) { var p = document.createElement("p"); p.textContent = t.trim(); frag.appendChild(p); } });
+    return frag;
+  }
+  function mbShow() {
+    var ses = mbLoad();
+    mbLogin.hidden = !!ses; mbArea.hidden = !ses;
+    mbLessons.textContent = "";
+    if (!ses) return;
+    document.getElementById("mb-who").textContent = ses.email;
+    mbSet("mb_loading", false);
+    var token;
+    mbToken().then(function (t) {
+      token = t;
+      return api("GET", "/rest/v1/course_lessons?select=id,course,position,title,body,video_path&order=course,position", t);
+    }).then(function (rows) {
+      if (!rows.length) { mbSet("mb_none", false); return; }
+      mbSet("", false);
+      rows.forEach(function (l) {
+        var art = document.createElement("article"); art.className = "card lesson";
+        var h = document.createElement("h2"); h.textContent = l.title; art.appendChild(h);
+        if (l.video_path) {
+          var v = document.createElement("video"); v.controls = true; v.preload = "metadata"; v.style.width = "100%";
+          art.appendChild(v);
+          var path = l.video_path.split("/").map(encodeURIComponent).join("/");
+          api("POST", "/storage/v1/object/sign/course-videos/" + path, token, { expiresIn: 3600 })
+            .then(function (sig) { v.src = SUPABASE_URL.replace(/\/$/, "") + "/storage/v1" + sig.signedURL; })
+            .catch(function () { mbSet("mb_err", true); });
+        }
+        art.appendChild(para(l.body));
+        mbLessons.appendChild(art);
+      });
+    }).catch(function (e) {
+      if (e.status === 401 || e.message === "no session") { mbSave(null); mbShow(); mbSet("mb_expired", true); }
+      else mbSet("mb_err", true);
+    });
+  }
+  // back from the login email: Supabase puts the session in the hash; keep it, clean the URL
+  (function () {
+    var h = location.hash || "";
+    if (!/[?&]login=members/.test(location.search) || !/access_token=/.test(h)) return;
+    var q = {};
+    h.replace(/^#/, "").split("&").forEach(function (kv) { var i = kv.indexOf("="); q[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1)); });
+    mbSave({ access_token: q.access_token, refresh_token: q.refresh_token, expires_at: Number(q.expires_at) || Math.floor(Date.now() / 1000) + Number(q.expires_in || 3600), email: jwtEmail(q.access_token) });
+    history.replaceState(null, "", location.pathname + "#members");
+    showRoute("members", true);
+  })();
+  mbForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = mbEmail.value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { mbEmail.setAttribute("aria-invalid", "true"); mbSet("nl_err_email", true); mbEmail.focus(); return; }
+    mbEmail.removeAttribute("aria-invalid");
+    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) { mbSet("mb_closed", false); return; }
+    var back = location.origin + location.pathname + "?login=members";
+    api("POST", "/auth/v1/otp?redirect_to=" + encodeURIComponent(back), null, { email: email, create_user: true })
+      .then(function () { mbSet("mb_sent", false); mbForm.reset(); })
+      .catch(function () { mbSet("mb_err", true); });
+  });
+  document.getElementById("mb-logout").addEventListener("click", function (e) {
+    e.preventDefault(); mbSave(null); mbSet("", false); mbShow();
+  });
+  window.addEventListener("hashchange", function () { if (location.hash === "#members") mbShow(); });
+  mbShow();
 
   // Stars: a fixed pseudo-random sky so it looks the same on every visit
   var stars = document.getElementById("stars");
