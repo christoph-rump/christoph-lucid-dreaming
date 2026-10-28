@@ -9,3 +9,4 @@
 ## History
 - 2026-10-27: first ported to Next.js for Vercel, then — on your instruction — kept as the plain `index.html` for
   GitHub Pages. `index.html` here is byte-identical to `C:\Dev\Materials\Christoph Rump – Lucid dreaming.html`.
+- [ ] **Privacy — members area:** add a paragraph on the login (email address, login time, Supabase) before you invite members.

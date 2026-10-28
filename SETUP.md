@@ -27,3 +27,14 @@ All in the lucid site's **own** Supabase project (not the facilitator network's)
 
 Unsubscribe links in each newsletter: `https://…/#unsubscribe=<unsubscribe_token>` (column in `subscribers`).
 Your list: Table editor → `subscribers`, rows with `confirmed_at` set and `unsubscribed_at` empty.
+
+## Members area (B-015c) — your steps
+1. **SQL:** SQL editor → paste `supabase/members.sql` → Run (after `newsletter.sql`).
+2. **Redirect:** Authentication → URL Configuration → add `https://christoph-rump.github.io/christoph-lucid-dreaming/?login=members`
+   to Redirect URLs (the login link returns there).
+3. **Give access** when someone has paid you: Table editor → `members` → add their email (lower case) and a note.
+   End access: set `revoked_at`.
+4. **Lessons:** Table editor → `course_lessons` (title, text, position). **Videos:** Storage → bucket `course-videos`
+   → upload, then put the file path (e.g. `course-1/lesson-1.mp4`) into `video_path`. The free plan holds ~1 GB of files.
+Members open **Members** in the footer, request a link and see only what you unlocked. Login uses the same email
+template as the newsletter (Magic Link) — word it so it fits both, e.g. "Your link / Dein Link".
