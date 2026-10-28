@@ -15,7 +15,17 @@ if (Test-Path fonts/fonts.css) {
     }
 }
 foreach ($ph in 'pv_ph_host', 'pv_font_ph') { if ($h -match "class=""ph"" data-i18n=""$ph""") { $fail += "privacy placeholder left: $ph" } }
-foreach ($f in 'SETUP.md', 'docs/NOTES.md', 'fonts/fonts.css') { if (-not (Test-Path $f)) { $fail += "missing $f" } }
+if ($h -match 'class="ph" data-i18n="pv_ph_nl"') { $fail += 'privacy placeholder left: pv_ph_nl' }
+# The page may only ever hold the anon public key, never the service_role key (B-015b)
+$key = [regex]::Match($h, 'var SUPABASE_ANON_KEY = "([^"]*)"').Groups[1].Value
+if ($key) {
+    try {
+        $p = $key.Split('.')[1].Replace('-', '+').Replace('_', '/'); $p += '=' * ((4 - $p.Length % 4) % 4)
+        $role = ([Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($p)) | ConvertFrom-Json).role
+        if ($role -ne 'anon') { $fail += "SUPABASE_ANON_KEY has role '$role' - only the anon public key belongs in the page" }
+    } catch { if ($key -notmatch '^sb_publishable_') { $fail += 'SUPABASE_ANON_KEY is neither an anon JWT nor a publishable key' } }
+}
+foreach ($f in 'SETUP.md', 'docs/NOTES.md', 'fonts/fonts.css', 'supabase/newsletter.sql') { if (-not (Test-Path $f)) { $fail += "missing $f" } }
 $open = ([regex]::Matches([IO.File]::ReadAllText((Join-Path $PSScriptRoot 'docs/NOTES.md')), '- \[ \]')).Count
 if ($fail) { $fail | ForEach-Object { "FAIL $_" }; exit 1 }
 "ok: index.html intact, $open launch items open"

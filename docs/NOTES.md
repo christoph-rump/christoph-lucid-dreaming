@@ -3,7 +3,7 @@
 ## Must be done before going live (German privacy law)
 - [x] **Privacy — hosting:** "hosted by [hosting provider]" → GitHub Pages (GitHub Inc., USA; server logs by GitHub).
 - [x] **Privacy — fonts:** fonts load from Google Fonts; your draft note says to self-host before launch.
-- [ ] **Newsletter:** form has no backend (`action=""`), text says "[newsletter provider]" → B-015b (Supabase, like the network, plus double opt-in).
+- [ ] **Newsletter:** code and SQL ready (B-015b); goes live after your Supabase steps in SETUP.md and the URL + anon key in `index.html`.
 - [ ] Legal notice (Impressum): check the address and contact details are current.
 
 ## History

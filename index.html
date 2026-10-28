@@ -787,7 +787,7 @@ button.btn { cursor: pointer; }
         </div>
         <div>
           <h2 data-i18n="pv_h_nl">Newsletter</h2>
-          <p><span data-i18n="pv_nl_a">If you subscribe, I use your email address to send you the newsletter. Sending is handled by</span> <span class="ph" data-i18n="pv_ph_nl">[newsletter provider]</span><span data-i18n="pv_nl_b">. You confirm your address in a confirmation email (double opt-in) and can unsubscribe at any time using the link in every newsletter. Legal basis: your consent (Art. 6(1)(a) GDPR).</span></p>
+          <p><span data-i18n="pv_nl_a">If you subscribe, I use your email address to send you the newsletter. Sending is handled by</span> <span data-i18n="pv_ph_nl">Supabase (Supabase, Inc., USA), which stores your sign-up, and Resend (resend.com), which delivers the emails</span><span data-i18n="pv_nl_b">. You confirm your address in a confirmation email (double opt-in) and can unsubscribe at any time using the link in every newsletter. Legal basis: your consent (Art. 6(1)(a) GDPR).</span></p>
         </div>
         <div>
           <h2 data-i18n="pv_h_li">Links to other websites</h2>
@@ -918,6 +918,12 @@ button.btn { cursor: pointer; }
       nl_err_email: "Error: please enter a valid email address.",
       nl_err_consent: "Error: please tick the box to confirm you’d like the newsletter.",
       nl_not_open: "The newsletter isn’t open for sign-ups yet. Please check back soon.",
+      nl_sending: "Sending…",
+      nl_check_mail: "Almost done: please click the link in the email I just sent you to confirm.",
+      nl_confirmed: "Thank you — your subscription is confirmed.",
+      nl_unsubscribed: "You’re unsubscribed. You won’t get the newsletter any more.",
+      nl_err_send: "Error: that didn’t work. Please try again in a moment.",
+      nl_err_link: "Error: this confirmation link has expired or was already used. Please sign up again.",
       foot_privacy: "Privacy policy", t_privacy: "Privacy policy – Christoph Rump",
       sm_priv_d: "How your data is handled.",
       disc_label: "Disclaimer:",
@@ -936,7 +942,7 @@ button.btn { cursor: pointer; }
       pv_stor_p: "This site does not use cookies, analytics or tracking. If you choose a language, that choice is saved only in your own browser.",
       pv_h_nl: "Newsletter",
       pv_nl_a: "If you subscribe, I use your email address to send you the newsletter. Sending is handled by",
-      pv_ph_nl: "[newsletter provider]",
+      pv_ph_nl: "Supabase (Supabase, Inc., USA), which stores your sign-up, and Resend (resend.com), which delivers the emails",
       pv_nl_b: ". You confirm your address in a confirmation email (double opt-in) and can unsubscribe at any time using the link in every newsletter. Legal basis: your consent (Art. 6(1)(a) GDPR).",
       pv_h_li: "Links to other websites",
       pv_li_p: "Links on this site, such as those to LinkedIn or to scientific studies, are ordinary links. Data is only passed to the other website if you click one, and its own privacy policy then applies.",
@@ -1049,6 +1055,12 @@ button.btn { cursor: pointer; }
       nl_err_email: "Fehler: Bitte gib eine gültige E-Mail-Adresse ein.",
       nl_err_consent: "Fehler: Bitte bestätige das Kästchen, um den Newsletter zu erhalten.",
       nl_not_open: "Die Anmeldung zum Newsletter ist noch nicht geöffnet. Bitte schau bald wieder vorbei.",
+      nl_sending: "Wird gesendet…",
+      nl_check_mail: "Fast geschafft: Bitte klicke auf den Link in der E-Mail, die ich dir gerade geschickt habe.",
+      nl_confirmed: "Danke — deine Anmeldung ist bestätigt.",
+      nl_unsubscribed: "Du bist abgemeldet und bekommst den Newsletter nicht mehr.",
+      nl_err_send: "Fehler: Das hat nicht geklappt. Bitte versuche es gleich noch einmal.",
+      nl_err_link: "Fehler: Dieser Bestätigungslink ist abgelaufen oder wurde schon benutzt. Bitte melde dich erneut an.",
       foot_privacy: "Datenschutz", t_privacy: "Datenschutz – Christoph Rump",
       sm_priv_d: "Wie mit deinen Daten umgegangen wird.",
       disc_label: "Disclaimer:",
@@ -1067,7 +1079,7 @@ button.btn { cursor: pointer; }
       pv_stor_p: "Diese Website verwendet keine Cookies, keine Analyse- und keine Tracking-Tools. Wenn du eine Sprache wählst, wird diese Wahl nur in deinem eigenen Browser gespeichert.",
       pv_h_nl: "Newsletter",
       pv_nl_a: "Wenn du dich anmeldest, verwende ich deine E-Mail-Adresse, um dir den Newsletter zu senden. Den Versand übernimmt",
-      pv_ph_nl: "[Newsletter-Anbieter]",
+      pv_ph_nl: "Supabase (Supabase, Inc., USA), das deine Anmeldung speichert, und Resend (resend.com), das die E-Mails zustellt",
       pv_nl_b: ". Du bestätigst deine Adresse in einer Bestätigungs-E-Mail (Double-Opt-in) und kannst dich jederzeit über den Link in jedem Newsletter abmelden. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO).",
       pv_h_li: "Links zu anderen Websites",
       pv_li_p: "Links auf dieser Website, etwa zu LinkedIn oder zu wissenschaftlichen Studien, sind einfache Links. Daten werden nur an die andere Website übermittelt, wenn du einen Link anklickst, und dort gilt dann deren eigene Datenschutzerklärung.",
@@ -1198,9 +1210,11 @@ button.btn { cursor: pointer; }
     document.getElementById("main").focus();
   });
 
-  // Newsletter sign-up. Paste the form URL from your newsletter provider below.
-  // While it is empty, the form validates but shows an honest "not open yet" message.
-  var NEWSLETTER_ENDPOINT = "";
+  // Newsletter sign-up via this site's own Supabase project (setup: SETUP.md, SQL: supabase/newsletter.sql).
+  // Paste the Project URL and the anon public key (never the service_role key). While they are empty,
+  // the form validates but shows an honest "not open yet" message.
+  var SUPABASE_URL = "";
+  var SUPABASE_ANON_KEY = "";
   var nlForm = document.getElementById("nl-form");
   var nlEmail = document.getElementById("nl-email");
   var nlConsent = document.getElementById("nl-consent");
@@ -1212,30 +1226,67 @@ button.btn { cursor: pointer; }
     nlStatus.textContent = key ? I18N[currentLang][key] : "";
   }
 
+  function supa(path, body) {
+    return fetch(SUPABASE_URL.replace(/\/$/, "") + path, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY },
+      body: JSON.stringify(body)
+    }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); });
+  }
+  function showNewsletter(key, isError) {
+    setStatus(key, isError);
+    document.querySelector(".newsletter").scrollIntoView({ block: "center" });
+  }
+  // Back from the confirmation email (Supabase adds tokens or an error to the hash), or an unsubscribe link
+  (function () {
+    var h = location.hash || "";
+    var clean = function () { history.replaceState(null, "", location.pathname + location.search); };
+    var unsub = h.match(/^#unsubscribe=([0-9a-f-]{36})$/i);
+    if (unsub && SUPABASE_URL) {
+      clean();
+      supa("/rest/v1/rpc/nl_unsubscribe", { p_token: unsub[1] })
+        .then(function () { showNewsletter("nl_unsubscribed", false); })
+        .catch(function () { showNewsletter("nl_err_send", true); });
+    } else if (/error_description=/.test(h)) {
+      clean(); showNewsletter("nl_err_link", true);
+    } else if (/access_token=/.test(h)) {
+      clean(); showNewsletter("nl_confirmed", false);   // the token is not kept: this page has no login
+    }
+  })();
+
   nlForm.addEventListener("submit", function (e) {
+    e.preventDefault();
     var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(nlEmail.value.trim());
     nlEmail.removeAttribute("aria-invalid");
     nlConsent.removeAttribute("aria-invalid");
     if (!ok) {
-      e.preventDefault();
       nlEmail.setAttribute("aria-invalid", "true");
       setStatus("nl_err_email", true);
       nlEmail.focus();
       return;
     }
     if (!nlConsent.checked) {
-      e.preventDefault();
       nlConsent.setAttribute("aria-invalid", "true");
       setStatus("nl_err_consent", true);
       nlConsent.focus();
       return;
     }
-    if (!NEWSLETTER_ENDPOINT) {
-      e.preventDefault();
+    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
       setStatus("nl_not_open", false);
       return;
     }
-    nlForm.setAttribute("action", NEWSLETTER_ENDPOINT);
+    var email = nlEmail.value.trim();
+    var back = location.origin + location.pathname;
+    var btn = nlForm.querySelector("button[type=submit]");
+    btn.disabled = true;
+    setStatus("nl_sending", false);
+    supa("/rest/v1/rpc/nl_request", { p_email: email, p_lang: currentLang })
+      .then(function () {
+        return supa("/auth/v1/otp?redirect_to=" + encodeURIComponent(back), { email: email, create_user: true });
+      })
+      .then(function () { setStatus("nl_check_mail", false); nlForm.reset(); })
+      .catch(function () { setStatus("nl_err_send", true); })
+      .then(function () { btn.disabled = false; });
   });
 
   // Stars: a fixed pseudo-random sky so it looks the same on every visit
