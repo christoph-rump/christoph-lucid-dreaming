@@ -449,7 +449,9 @@ button.btn { cursor: pointer; }
 [aria-invalid="true"] { border-color: #FFB4A8; }
 .check input[aria-invalid="true"] { outline: 2px solid #FFB4A8; outline-offset: 2px; }
 #mb-area a { color: inherit; text-underline-offset: .2em; }
-#mb-lessons .lesson { margin: 2rem 0; }
+#mb-lessons .lesson { margin: 1.25rem 0 2rem; }
+#mb-lessons h2.course { font-family: var(--display); font-weight: 600; font-size: 1.6rem; letter-spacing: -.02em; margin: 2.5rem 0 .5rem; }
+#mb-lessons .lesson h3 { margin: 0 0 .5rem; }
 .nl-status { margin: .75rem 0 0; min-height: 1.6em; color: var(--night-ink); }
 .newsletter .nl-status[data-state="error"] { color: #FFB4A8; }
 
@@ -1375,7 +1377,9 @@ button.btn { cursor: pointer; }
     String(text || "").split(/\n\s*\n/).forEach(function (t) { if (t.trim()) { var p = document.createElement("p"); p.textContent = t.trim(); frag.appendChild(p); } });
     return frag;
   }
+  var mbSeq = 0;   // only the latest load may draw the lessons (two quick loads would otherwise both append)
   function mbShow() {
+    var seq = ++mbSeq;
     var ses = mbLoad();
     mbLogin.hidden = !!ses; mbArea.hidden = !ses;
     mbLessons.textContent = "";
@@ -1387,11 +1391,18 @@ button.btn { cursor: pointer; }
       token = t;
       return api("GET", "/rest/v1/course_lessons?select=id,course,position,title,body,video_path&order=course,position", t);
     }).then(function (rows) {
+      if (seq !== mbSeq) return;
+      mbLessons.textContent = "";
       if (!rows.length) { mbSet("mb_none", false); return; }
       mbSet("", false);
+      var lastCourse = null;
       rows.forEach(function (l) {
+        if (l.course !== lastCourse) {
+          lastCourse = l.course;
+          var ch = document.createElement("h2"); ch.className = "course"; ch.textContent = l.course; mbLessons.appendChild(ch);
+        }
         var art = document.createElement("article"); art.className = "card lesson";
-        var h = document.createElement("h2"); h.textContent = l.title; art.appendChild(h);
+        var h = document.createElement("h3"); h.textContent = l.title; art.appendChild(h);
         if (l.video_path) {
           var v = document.createElement("video"); v.controls = true; v.preload = "metadata"; v.style.width = "100%";
           art.appendChild(v);
